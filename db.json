@@ -1,0 +1,263 @@
+{
+  "students": [
+    {
+      "name": "KORNKANOK",
+      "surname": "KANCHANA",
+      "id": "642115001",
+      "image": "https://www.washingtonpost.com/brand-studio/harrys/the-many-faces-of-masculinity/media/slider-1.jpg",
+      "advisorId": 1,
+      "course_list": ["SE123", "SE331","SE123", "SE331","SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "Welcome to the classroom of endless possibilities! We're thrilled to have you here, where learning knows no bounds. This room is your gateway to knowledge, exploration, and growth. As you embark on this educational journey, remember that every question you ask, every idea you share, and every effort you put in, contributes to the rich tapestry of our learning environment.", "author": "1"  },
+        { "id": 2, "text": "Come to my room", "author": "1"   }
+      ]
+    },
+    {
+      "name": "KRITTAYOCH",
+      "surname": "JONGCHAISITTIKUL",
+      "id": "642115002",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 2,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "1"   },
+        { "id": 2, "text": "Good boy", "author": "2"   }
+      ]
+    },
+    {
+      "name": "KAN",
+      "surname": "KATPARK",
+      "id": "642115003",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 3,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "2"    }
+      ]
+
+    },
+    {
+      "name": "KITDANAI",
+      "surname": "PALEE",
+      "id": "642115004",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 4,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "1"    }
+      ]
+
+    },
+    {
+      "name": "KITTIPAT",
+      "surname": "TACHAMANOKUL",
+      "id": "642115005",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 5,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "1"    }
+      ]
+    },
+    {
+      "name": "JAKKAPHAT",
+      "surname": "PLOYLAKE",
+      "id": "642115006",
+      "image": "https://www.washingtonpost.com/brand-studio/harrys/the-many-faces-of-masculinity/media/slider-1.jpg",
+      "advisorId": 6,
+      "course_list": ["SE123", "SE331","SE123", "SE331","SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "Welcome to the classroom of endless possibilities! We're thrilled to have you here, where learning knows no bounds. This room is your gateway to knowledge, exploration, and growth. As you embark on this educational journey, remember that every question you ask, every idea you share, and every effort you put in, contributes to the rich tapestry of our learning environment.", "author": "1"  },
+        { "id": 2, "text": "Come to my room", "author": "1"   }
+      ]
+    },
+    {
+      "name": "JIRAPAT",
+      "surname": "NAMWONG",
+      "id": "642115008",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 7,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "1"   },
+        { "id": 2, "text": "Good boy", "author": "2"   }
+      ]
+    },
+    {
+      "name": "JULALUCK",
+      "surname": "KYETAATPARK",
+      "id": "642115009",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 8,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "2"    }
+      ]
+
+    },
+    {
+      "name": "YANWARUT",
+      "surname": "SUKSAWAT",
+      "id": "6421150011",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 1,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "1"    }
+      ]
+
+    },
+    {
+      "name": "YADA",
+      "surname": "LAKHONJUN",
+      "id": "642115015",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 2,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "1"    }
+      ]
+    },
+    {
+      "name": "DANAIKRIT",
+      "surname": "JAIWONG",
+      "id": "642115016",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 3,
+      "course_list": ["SE123", "SE331","SE123", "SE331","SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "Welcome to the classroom of endless possibilities! We're thrilled to have you here, where learning knows no bounds. This room is your gateway to knowledge, exploration, and growth. As you embark on this educational journey, remember that every question you ask, every idea you share, and every effort you put in, contributes to the rich tapestry of our learning environment.", "author": "1"  },
+        { "id": 2, "text": "Come to my room", "author": "1"   }
+      ]
+    },
+    {
+      "name": "DUSIT",
+      "surname": "CHUNVISET",
+      "id": "642115017",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 4,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "1"   },
+        { "id": 2, "text": "Good boy", "author": "2"   }
+      ]
+    },
+    {
+      "name": "TANINWAT",
+      "surname": "PHUTTICHAIWARANGKUL",
+      "id": "642115019",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 5,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "2"    }
+      ]
+
+    },
+    {
+      "name": "THIWAKON",
+      "surname": "SAKUNCHAO",
+      "id": "642115020",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 6,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "1"    }
+      ]
+
+    },
+    {
+      "name": "TANAKORN",
+      "surname": "WALEECHAROENPONG",
+      "id": "642115021",
+      "image": "https://img.freepik.com/premium-photo/unknown-male-silhouette-person_68747-222.jpg",
+      "advisorId": 7,
+      "course_list": ["SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "hello welcome", "author": "2"    },
+        { "id": 2, "text": "Good boy", "author": "1"    }
+      ]
+    },
+    {
+      "name": "TANAPONG",
+      "surname": "YAMKAMOL",
+      "id": "6421150022",
+      "image": "https://www.washingtonpost.com/brand-studio/harrys/the-many-faces-of-masculinity/media/slider-1.jpg",
+      "advisorId": 8,
+      "course_list": ["SE123", "SE331","SE123", "SE331","SE123", "SE331"],
+      "comments": [
+        { "id": 1, "text": "Welcome to the classroom of endless possibilities! We're thrilled to have you here, where learning knows no bounds. This room is your gateway to knowledge, exploration, and growth. As you embark on this educational journey, remember that every question you ask, every idea you share, and every effort you put in, contributes to the rich tapestry of our learning environment.", "author": "1"  },
+        { "id": 2, "text": "Come to my room", "author": "1"   }
+      ]
+    }
+  ],
+
+  "advisors": [
+    {
+      "id": 1,
+      "name": "Aj. Chartchai",
+      "surname": "duangsaad",
+      "image":"https://i1.rgstatic.net/ii/profile.image/280166027808778-1443808194990_Q512/Chartchai-Doungsa-Ard.jpg",
+      "email": "chartchai.d@cmu.ac.th"
+    },
+    {
+      "id": 2,
+      "name": "Aj. PATTAMA",
+      "surname": "LONGANI",
+      "image":" https://service.camt.cmu.ac.th/person_imgs/pattama.jpg",
+      "email": "pattama.l@cmu.ac.th"
+    },
+    {
+      "id": 3,
+      "name": "Aj. APITCHAKA ",
+      "surname": "SINGJAI",
+      "image":"https://service.camt.cmu.ac.th/person_imgs/apichaka2.jpg",
+      "email": "apitchaka.s@cmu.ac.th"
+
+    },
+    {
+      "id": 4,
+      "name": "Aj. PASSAKORN  ",
+      "surname": "PHANNACHITTA",
+      "image":"https://service.camt.cmu.ac.th/person_imgs/passakorn.jpg",
+      "email": "passakorn.p@cmu.ac.th"
+    },
+    {
+      "id": 5,
+      "name": "Aj. PREE ",
+      "surname": "THIENGBURANATHUM",
+      "image":" https://service.camt.cmu.ac.th/person_imgs/pree.jpg",
+      "email": "pree.t@cmu.ac.th"
+    },
+    {
+      "id": 6,
+      "name": "Aj. PARINYA ",
+      "surname": "SUWANSRIKHAM",
+      "image":"https://service.camt.cmu.ac.th/person_imgs/parinya.jpg",
+      "email": "parinya.s@cmu.ac.th"
+    },
+    {
+      "id": 7,
+      "name": "Aj. PATHATHAI",
+      "surname": "NALUMPOON",
+      "image":"https://service.camt.cmu.ac.th/person_imgs/pattathai.jpg",
+      "email": "pathathai.n@cmu.ac.th"
+    },
+    {
+      "id": 8,
+      "name": "Aj. JENJIRA ",
+      "surname": "JAIMUNK",
+      "image":"https://service.camt.cmu.ac.th/person_imgs/jaimunk.jpg",
+      "email": "jenjira.j@cmu.ac.th"
+
+    } 
+  ]
+}
