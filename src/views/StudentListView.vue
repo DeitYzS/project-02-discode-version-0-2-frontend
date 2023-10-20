@@ -45,7 +45,12 @@ const hasNextPage = computed(() => {
 })
 </script>
 <template>
-  <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard>
+  <main>
+    <div class="VStack items-center">
+      <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard>
+
+    </div>
+  </main>
 
   <!-- <div class="pagination font-bold mt-5">
     <RouterLink
