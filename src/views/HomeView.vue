@@ -1,32 +1,38 @@
 <template>
-  <div class="VStack">
-    <div class="VStack text-center align-middle items-center space-y-10 mt-20">
-      <div class="space-y-6">
-        <p class="text-5xl font-semibold">
-          Unlock New Way with Super Idol
-          <br />
-          Unleash the Spirit of Management!
-        </p>
-        <p class="text-gray-500">
-          Elephant pants are loose, wide-legged pants with colourful patterns, often featuring
-          elephant designs.
-          <br />
-          They are known for their comfortable and relaxed fit, popular for casual and beachwear.
-        </p>
-      </div>
+  <main class="container mx-auto px-4">
+    <div class="VStack justify-end h-screen">
+      <div class="p-8 m-8 mb-16">
+        <div class="md:w-1/2">
+          <p class="font-bold text-lg">CMU</p>
+          <p class="text-2xl">College of Arts, Media and Technology, Chiang Mai University</p>
+          <h1 class="text-left text-5xl font-medium black font-primary">
+            Get ready for New Auctions <br />
+            <span class="text-left text-lg font-light font-sans">
+              Now you can take your event and session <br />
+              <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
+            </span>
+          </h1>
+        </div>
 
-      <div class="HStack space-x-10">
-        
-        <RouterLink
-          class="ocean-blue p-2 rounded-lg"
-          :to="{ name: 'register' }"
-        >
-          Register
-        </RouterLink>
-        
+        <div class="herizontal-line"></div>
+
+        <div class="HStack text-center">
+          <div class="VStack w-1/3">
+            <p>Students</p>
+            <p class="text-5xl">A</p>
+          </div>
+          <div class="VStack w-1/3">
+            <p>Advisors</p>
+            <p class="text-5xl">A</p>
+          </div>
+          <div class="VStack w-1/3">
+            <p>All</p>
+            <p class="text-5xl">A</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script setup lang="ts"></script>

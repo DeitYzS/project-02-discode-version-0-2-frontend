@@ -3,7 +3,7 @@
     <div
       v-for="comment in comments"
       :key="comment.id"
-      class="bg-white rounded-lg shadow-sm p-2 mt-4"
+      class="rounded-lg shadow-sm p-2 mt-4"
     >
       <div class="VStack">
         <div class="HStack p-4">
