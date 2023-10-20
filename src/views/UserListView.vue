@@ -1,6 +1,6 @@
 <template class="bg-black">
   <main class="flex flex-col items-center text-white">
-    <div class=" relative window">
+    <div class="relative window">
       <!-- Other content here -->
       <!-- <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard> -->
       <!-- Display child components within the layout -->
@@ -21,8 +21,6 @@
         </div>
       </div>
     </div>
-
-
   </main>
 </template>
 <style>
@@ -30,13 +28,14 @@
   width: 70%;
   height: 720px;
   border-radius: 46px;
-border: 1px solid var(--windows-stroke-glass-specular, rgba(255, 255, 255, 0.40));
-background: var(--windows-glass, rgba(128, 128, 128, 0.30));
-background-blend-mode: luminosity;
+  border: 1px solid var(--windows-stroke-glass-specular, rgba(255, 255, 255, 0.4));
+  background: var(--windows-glass, rgba(128, 128, 128, 0.3));
+  background-blend-mode: luminosity;
 
-/* Blur */
-backdrop-filter: blur(50px);
+  /* Blur */
+  backdrop-filter: blur(50px);
 }
+
 .toolbar {
   left: 20%; /* Center the toolbar */
   right: 20%;
@@ -46,16 +45,17 @@ backdrop-filter: blur(50px);
   height: 68px;
 
   border-radius: 100px;
-  border: 1.4px solid rgba(255, 255, 255, 0.40);
-  background: var(--windows-glass, rgba(128, 128, 128, 0.30));
+  border: 1.4px solid rgba(255, 255, 255, 0.4);
+  background: var(--windows-glass, rgba(128, 128, 128, 0.3));
   background-blend-mode: luminosity;
 
   /* Blur */
   backdrop-filter: blur(50px);
 }
 
+@media only screen and (max-width: 600px) {
 
-
+}
 </style>
 
 <script setup lang="ts">
