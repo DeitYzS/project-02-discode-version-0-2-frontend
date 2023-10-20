@@ -1,5 +1,5 @@
 <template>
-  <form id="commentForm" class="bg-white rounded-lg shadow-sm p-2">
+  <form id="commentForm" class="bg-white rounded-lg shadow-sm p-2 mt-4">
     <div class="VStack relative">
       <textarea class="bg-gray-200 h-36 rounded-md" v-model="newCommentText"></textarea>
       <div class="HStack absolute bottom-0 right-0">

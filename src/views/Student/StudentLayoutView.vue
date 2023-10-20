@@ -47,10 +47,9 @@ const id = ref(student.value?.id)
           </RouterLink>
         </div>
       </div>
-                <!-- Display child components within the layout -->
-                <router-view></router-view>
+      <!-- Display child components within the layout -->
+      <router-view></router-view>
     </div>
-
   </main>
 </template>
 

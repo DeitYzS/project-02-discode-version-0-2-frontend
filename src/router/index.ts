@@ -16,7 +16,7 @@ import HomeView from '@/views/HomeView.vue'
 import RegisterLayoutView from '@/views/Register/RegisterLayoutView.vue'
 import StudentRegisterView from '@/views/Register/StudentRegisterView.vue'
 import AdvisorRegisterView from '@/views/Register/AdvisorRegisterView.vue'
-
+import StudentCommentView from '@/views/Student/StudentCommentView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -89,6 +89,11 @@ const router = createRouter({
           path: '',
           name: 'student-detail',
           component: StudentDetailView,
+          props: true
+        },{
+          path: '',
+          name: 'student-comment',
+          component: StudentCommentView,
           props: true
         }
       ]
