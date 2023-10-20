@@ -1,5 +1,5 @@
 <template class="bg-black">
-  <main class="flex flex-col items-center text-white">
+  <main class="flex flex-col items-center text-white mt-14">
     <div class="relative window">
       <!-- Other content here -->
       <!-- <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard> -->
