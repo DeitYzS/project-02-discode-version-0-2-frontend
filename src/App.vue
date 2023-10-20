@@ -3,112 +3,38 @@ import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
-  <div class="bg-container font-mono">
-    <header id="Dock" class=" m-4 p-4 rounded-2xl">
-        <nav class="HStack justify-between">
-          <div  class="font-semibold text-2xl">
-            <RouterLink to="/">Super idol</RouterLink>
-
+  <div class="bg-container text-white">
+    <header class="p-4 sticky top-0 z-10">
+      <nav class="container mx-auto px-4">
+        <div class="HStack justify-between" id="logo">
+          <div class="logo">
+            <RouterLink to="/"><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></RouterLink>
           </div>
-          <div class="font-base  space-x-4">
-
-            <RouterLink to="/student">student</RouterLink>
-          <RouterLink to="/advisor">advisor</RouterLink>
+          <div class="HStack" id="menubar">
+            <div class="menubar-item px-4"><RouterLink to="/student">student</RouterLink></div>
+            <div class="menubar-item px-4"><RouterLink to="/advisor">advisor</RouterLink></div>
           </div>
-
-        </nav>
+        </div>
+      </nav>
     </header>
 
     <RouterView />
   </div>
+  <link href="https://db.onlinewebfonts.com/c/2cb69c1d167cdd29fd32acd783e60e59?family=Good+Times+W00+Heavy" rel="stylesheet">
 </template>
 
 <style scoped>
 
-.bg-container {
+.bg-container::before {
+  content: "";
   position: fixed;
-  z-index: -1;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: linear-gradient(
-    to right,
-    #c5dbf2,
-    #cee5fe,
-    #f9f9f9,
-    #f9ecfa,
-    #f9f9f9,
-    #cee5fe,
-    #c5dbf2
-  );
-  animation: animateBg 10s linear infinite;
-  background-size: 400% 400%;
-}
-
-@keyframes animateBg {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-/* 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-nav {
   width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-} */
-/* 
-nav a.router-link-exact-active {
-  color: var(--color-text);
+  height: 100%;
+  z-index: -1;
+  background-image: url('/src/assets/atmostphere.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-} */
-/* 
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-} */
 </style>

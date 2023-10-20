@@ -11,4 +11,29 @@
   .VStack {
     @apply flex flex-col;
   }
+  .font-primary {
+    font-family: "Good Times W00 Heavy";
+  }
+  .font-secondary {
+    font-family: "Exe";
+  }
+  .herizontal-line {
+    width: 100%; /* Adjust to set the length of the line */
+    height: 1px; /* Adjust to set the thickness of the line */
+    background-color: #fff; /* Adjust to change the color of the line */
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+  .vertical-line{
+    width: 1px; /* Adjust to set the length of the line */
+    height: 100%; /* Adjust to set the thickness of the line */
+    background-color: #fff; /* Adjust to change the color of the line */
+    margin-top: 16px;
+    margin-bottom: 16px;
+  }
+}
+
+@font-face {
+  font-family: 'Exe'; /* You can choose any name */
+  src: url('/src/assets/fonts/the-pretender-exp-sans.ttf') format('truetype'); /* Replace with your font file path */
 }
