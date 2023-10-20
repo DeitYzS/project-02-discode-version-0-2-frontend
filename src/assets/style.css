@@ -11,4 +11,17 @@
   .VStack {
     @apply flex flex-col;
   }
+  .button-circle{
+    /* layout */
+    display: flex;
+  width: 44px;
+  height: 44px;
+  justify-content: center;
+  align-items: center;
+  
+  /* style */
+  border-radius: 100px;
+  background: linear-gradient(0deg, rgba(94, 94, 94, 0.18) 0%, rgba(94, 94, 94, 0.18) 100%), rgba(255, 255, 255, 0.06);
+  background-blend-mode: color-dodge, lighten;
+  }
 }

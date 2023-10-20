@@ -1,6 +1,6 @@
 <template class="bg-black">
-  <main class="flex flex-col items-center">
-    <div class="window relative">
+  <main class="flex flex-col items-center text-white">
+    <div class=" relative window">
       <!-- Other content here -->
       <!-- <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard> -->
       <!-- Display child components within the layout -->
@@ -27,28 +27,35 @@
 </template>
 <style>
 .window {
-  width: 1280px;
+  width: 70%;
   height: 720px;
   border-radius: 46px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+border: 1px solid var(--windows-stroke-glass-specular, rgba(255, 255, 255, 0.40));
+background: var(--windows-glass, rgba(128, 128, 128, 0.30));
+background-blend-mode: luminosity;
+
+/* Blur */
+backdrop-filter: blur(50px);
 }
 .toolbar {
-  left: 0;
-  right: 0;
+  left: 20%; /* Center the toolbar */
+  right: 20%;
   bottom: -34px;
-  margin: auto;
   position: absolute;
-  width: 511px;
+  width: 58%; /* Set the width to be 60% of the window */
   height: 68px;
-  border-radius: 46px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+
+  border-radius: 100px;
+  border: 1.4px solid rgba(255, 255, 255, 0.40);
+  background: var(--windows-glass, rgba(128, 128, 128, 0.30));
+  background-blend-mode: luminosity;
+
+  /* Blur */
+  backdrop-filter: blur(50px);
 }
+
+
+
 </style>
 
 <script setup lang="ts">
