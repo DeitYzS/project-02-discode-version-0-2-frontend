@@ -49,9 +49,7 @@ const hasNextPage = computed(() => {
   <main>
     <div class="HStack items-center">
       <AdvisorCard v-for="advisor in advisors" :advisor="advisor" :key="advisor.id"></AdvisorCard>
-    </div>
-
-    <!-- <div class="pagination font-bold ">
+        <div class="pagination font-bold ">
     <RouterLink :to="{ name: 'advisor-list', query: {page: page-1}}" rel="prev" v-if="page != 1" id="page-prev " class=" mr-6 hover:text-green-500">
       Prev page
     </RouterLink>
@@ -59,6 +57,9 @@ const hasNextPage = computed(() => {
     <RouterLink :to="{ name: 'advisor-list', query: {page: page+1}}" rel="next" v-if="hasNextPage" id="page-next" class=" ml-6 hover:text-green-500">
       Next page
     </RouterLink>
-  </div> -->
+  </div>
+    </div>
+
+  
   </main>
 </template>
