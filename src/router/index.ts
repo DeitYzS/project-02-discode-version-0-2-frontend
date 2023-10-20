@@ -1,8 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import StudentListView from '@/views/StudentListView.vue'
+import UserListView from '@/views/UserListView.vue'
 import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkView from '@/views/NetworkView.vue'
-import AdvisorView from '@/views/AdvisorListView.vue'
 import StudentLayoutView from '@/views/Student/StudentLayoutView.vue'
 import { useStudentStore } from '@/stores/student'
 import NProgress from 'nprogress'
@@ -17,6 +16,9 @@ import RegisterLayoutView from '@/views/Register/RegisterLayoutView.vue'
 import StudentRegisterView from '@/views/Register/StudentRegisterView.vue'
 import AdvisorRegisterView from '@/views/Register/AdvisorRegisterView.vue'
 import StudentCommentView from '@/views/Student/StudentCommentView.vue'
+import AdvisorListView from '@/views/AdvisorListView.vue'
+import StudentListView from '@/views/StudentListView.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -26,16 +28,25 @@ const router = createRouter({
       component: HomeView
     },
     {
-      path: '/student',
-      name: 'student-list',
-      component: StudentListView,
-      props: (route) => ({page: parseInt(route.query?.page as string || '1')})
-    },
-    {
-      path: '/advisor',
-      name: 'advisor-list',
-      component: AdvisorView,
-      props: (route) => ({page: parseInt(route.query?.page as  string || '1')})
+      path: '/userlist',
+      name: 'user-list',
+      component: UserListView,
+      // props: (route) => ({page: parseInt(route.query?.page as string || '1')}),
+      children: [
+        {
+          path: '',
+          name: 'student-list',
+          component: StudentListView,
+          props: (route) => ({page: parseInt(route.query?.page as  string || '1')})
+
+        },
+        {
+          path: '',
+          name: 'advisor-list',
+          component: AdvisorListView,
+          props: (route) => ({page: parseInt(route.query?.page as  string || '1')})
+        }
+      ]
     },
     {
       path: '/register',

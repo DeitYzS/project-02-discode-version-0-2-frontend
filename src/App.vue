@@ -10,9 +10,9 @@ import { RouterLink, RouterView } from 'vue-router'
           <div class="logo">
             <RouterLink to="/"><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></RouterLink>
           </div>
-          <div class="HStack" id="menubar">
-            <div class="menubar-item px-4"><RouterLink to="/student">student</RouterLink></div>
-            <div class="menubar-item px-4"><RouterLink to="/advisor">advisor</RouterLink></div>
+          <div class="font-base  space-x-4">
+
+            <RouterLink to="/userlist">Users</RouterLink>
           </div>
         </div>
       </nav>
