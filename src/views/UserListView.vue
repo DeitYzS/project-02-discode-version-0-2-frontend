@@ -1,0 +1,99 @@
+<template class="bg-black">
+  <main class="flex flex-col items-center">
+    <div class="window relative">
+      <!-- Other content here -->
+      <!-- <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard> -->
+      <!-- Display child components within the layout -->
+      <router-view></router-view>
+      <div class="toolbar">
+        <div class="HStack w-full h-full">
+          <div class="w-1/2 flex items-center justify-center">
+            <RouterLink class="hover:text-red-400" :to="{ name: 'student-list' }"
+              >Student</RouterLink
+            >
+          </div>
+
+          <div class="w-1/2 flex items-center justify-center">
+            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-list' }"
+              >Advisor</RouterLink
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+</template>
+<style>
+.window {
+  width: 1280px;
+  height: 720px;
+  border-radius: 46px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+.toolbar {
+  left: 0;
+  right: 0;
+  bottom: -34px;
+  margin: auto;
+  position: absolute;
+  width: 511px;
+  height: 68px;
+  border-radius: 46px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+}
+</style>
+
+<script setup lang="ts">
+import type { StudentItem } from '@/type'
+import StudentCard from '@/components/StudentCard.vue'
+import { ref, type Ref, computed } from 'vue'
+import StudentService from '@/services/StudentService'
+import type { AxiosResponse } from 'axios'
+import { useRouter } from 'vue-router'
+import { onBeforeRouteUpdate } from 'vue-router'
+
+const router = useRouter()
+const students: Ref<Array<StudentItem>> = ref([])
+const totalEvent = ref<number>(0)
+const props = defineProps({
+  page: {
+    type: Number,
+    required: true
+  }
+})
+
+StudentService.getStudent(5, props.page)
+  .then((res: AxiosResponse<StudentItem[]>) => {
+    students.value = res.data
+    totalEvent.value = res.headers['x-total-count']
+  })
+  .catch(() => {
+    router.push({ name: 'NetworkError' })
+  })
+
+onBeforeRouteUpdate((to, from, next) => {
+  const toPage = Number(to.query.page)
+  StudentService.getStudent(5, toPage)
+    .then((res: AxiosResponse<StudentItem[]>) => {
+      students.value = res.data
+      totalEvent.value = res.headers['x-total-count']
+      next()
+    })
+    .catch(() => {
+      next({ name: 'NetworkError' })
+    })
+})
+
+const hasNextPage = computed(() => {
+  const totalPages = Math.ceil(totalEvent.value / 5)
+  return props.page.valueOf() < totalPages
+})
+</script>

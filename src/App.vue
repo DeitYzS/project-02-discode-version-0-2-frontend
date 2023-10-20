@@ -25,7 +25,7 @@ import { RouterLink, RouterView } from 'vue-router'
 
 <style scoped>
 
-.bg-container {
+/* .bg-container {
   position: fixed;
   z-index: -1;
   top: 0;
@@ -44,7 +44,7 @@ import { RouterLink, RouterView } from 'vue-router'
   );
   animation: animateBg 10s linear infinite;
   background-size: 400% 400%;
-}
+} */
 
 @keyframes animateBg {
   0% {

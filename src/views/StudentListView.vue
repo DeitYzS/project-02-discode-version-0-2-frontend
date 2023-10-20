@@ -1,32 +1,3 @@
-<template class="bg-black">
-  <h1 class="flex flex-col items-center font-bold">STUDENTLIST</h1>
-  <main class="flex flex-col items-center">
-    <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard>
-
-    <div class="pagination font-bold mt-5">
-      <RouterLink
-        :to="{ name: 'student-list', query: { page: page - 1 } }"
-        rel="prev"
-        v-if="page != 1"
-        id="page-prev"
-        class="hover:text-green-500 m-10"
-      >
-        Prev page
-      </RouterLink>
-
-      <RouterLink
-        :to="{ name: 'student-list', query: { page: page + 1 } }"
-        rel="next"
-        v-if="hasNextPage"
-        id="page-next"
-        class="hover:text-green-500 m-10"
-      >
-        Next page
-      </RouterLink>
-    </div>
-  </main>
-</template>
-
 <script setup lang="ts">
 import type { StudentItem } from '@/type'
 import StudentCard from '@/components/StudentCard.vue'
@@ -73,3 +44,36 @@ const hasNextPage = computed(() => {
   return props.page.valueOf() < totalPages
 })
 </script>
+<template>
+  <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard>
+
+  <!-- <div class="pagination font-bold mt-5">
+    <RouterLink
+      :to="{ name: 'student-list', query: { page: page - 1 } }"
+      rel="prev"
+      v-if="page != 1"
+      id="page-prev"
+      class="hover:text-green-500 m-10"
+    >
+      Prev page
+    </RouterLink>
+
+    <RouterLink
+      :to="{ name: 'student-list', query: { page: page + 1 } }"
+      rel="next"
+      v-if="hasNextPage"
+      id="page-next"
+      class="hover:text-green-500 m-10"
+    >
+      Next page
+    </RouterLink>
+  </div> -->
+</template>
+
+<style scoped>
+.ocean-blue {
+  background-color: #1b9ff4;
+  color: white;
+  min-width: 120px;
+}
+</style>
