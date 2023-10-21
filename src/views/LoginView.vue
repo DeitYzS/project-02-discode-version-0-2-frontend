@@ -98,7 +98,7 @@ const { value: username } = useField<string> ('username')
 const { value: password } = useField<string>('password')
 const onSubmit = handleSubmit((values) => {
   authStore
-  .login(values.username, values.password)
+  .login(values.username, values.password) 
   .then(() => {
     console.log('login success');
     router.push({ name: 'student-list'})

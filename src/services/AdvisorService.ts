@@ -13,7 +13,7 @@ export default {
   saveAdvisor (advisor:AdvisorItem) : Promise<AxiosResponse<AdvisorItem>> {
     return apiClient.post<AdvisorItem>('/advisors', advisor)
   },
-  getOrganizersBy(): Promise<AxiosResponse<AdvisorItem[]>> {
+  getAdvisorBy(): Promise<AxiosResponse<AdvisorItem[]>> {
     return apiClient.get<AdvisorItem[]>(`/advisors`)
   }
 }

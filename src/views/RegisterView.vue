@@ -21,6 +21,7 @@ const validationSchema = yup.object({
 const { errors, handleSubmit } = useForm({
   validationSchema,
   initialValues: {
+    studentId: 0,
     username: '',
     password: '',
     firstname: '',
@@ -34,11 +35,12 @@ const { value: password } = useField<string>('password')
 const { value: firstname } = useField<string>('firstname')
 const { value: lastname } = useField<string>('lastname')
 const { value: username } = useField<string>('username')
+const { value: studentId } = useField<string>('studentId')
 
 const onSubmit = handleSubmit((values) => {
   console.log(values)
   authStore
-    .register(values.email, values.password, values.username, values.firstname, values.lastname)
+    .registerStudent(values.studentId ,values.email, values.password, values.username, values.firstname, values.lastname)
     .then(() => {
       console.log('Register Success')
       router.push({ name: 'student-list' })
@@ -57,6 +59,10 @@ const onSubmit = handleSubmit((values) => {
 <template>
  <div class="flex min-h-full flex-1 flex-col justify-items-center px-6 py-12 lg:px-8">
     <form action="#" method="POST" @submit.prevent="onSubmit">
+      <div class="my-5">
+        <h5>StudentID</h5>
+        <InputText type="password" v-model="studentId" :error="errors['studentId']"></InputText>
+      </div>
       <div class="my-5">
         <h5>Username</h5>
         <InputText type="text" v-model="username" :error="errors['username']"></InputText>

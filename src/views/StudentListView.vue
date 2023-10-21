@@ -6,6 +6,7 @@ import StudentService from '@/services/StudentService'
 import type { AxiosResponse } from 'axios'
 import { useRouter } from 'vue-router'
 import { onBeforeRouteUpdate } from 'vue-router'
+import BaseInput from '@/components/BaseInput.vue'
 
 const router = useRouter()
 const keyword = ref('')
@@ -43,7 +44,7 @@ onBeforeRouteUpdate((to, from, next) => {
 })
 
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvent.value / 2)
+  const totalPages = Math.ceil(totalEvent.value / 5)
   return props.page.valueOf() < totalPages
 })
 
