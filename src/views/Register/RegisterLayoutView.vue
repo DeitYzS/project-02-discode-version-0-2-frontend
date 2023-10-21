@@ -32,7 +32,7 @@
 </template>
 
 <script setup lang="ts">
-import { useMessageStore } from '@/stores/massage'
+import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
 
 const store = useMessageStore()
@@ -50,3 +50,4 @@ const { message } = storeToRefs(store)
 }
 
 </style>
+@/stores/message

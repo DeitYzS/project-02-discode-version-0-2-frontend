@@ -59,48 +59,48 @@
 </style>
 
 <script setup lang="ts">
-import type { StudentItem } from '@/type'
-import StudentCard from '@/components/StudentCard.vue'
-import { ref, type Ref, computed } from 'vue'
-import StudentService from '@/services/StudentService'
-import type { AxiosResponse } from 'axios'
-import { useRouter } from 'vue-router'
-import { onBeforeRouteUpdate } from 'vue-router'
+// import type { StudentItem } from '@/type'
+// import StudentCard from '@/components/StudentCard.vue'
+// import { ref, type Ref, computed } from 'vue'
+// import StudentService from '@/services/StudentService'
+// import type { AxiosResponse } from 'axios'
+// import { useRouter } from 'vue-router'
+// import { onBeforeRouteUpdate } from 'vue-router'
 
-const router = useRouter()
-const students: Ref<Array<StudentItem>> = ref([])
-const totalEvent = ref<number>(0)
-const props = defineProps({
-  page: {
-    type: Number,
-    required: true
-  }
-})
+// const router = useRouter()
+// const students: Ref<Array<StudentItem>> = ref([])
+// const totalEvent = ref<number>(0)
+// const props = defineProps({
+//   page: {
+//     type: Number,
+//     required: true
+//   }
+// })
 
-StudentService.getStudent(5, props.page)
-  .then((res: AxiosResponse<StudentItem[]>) => {
-    students.value = res.data
-    totalEvent.value = res.headers['x-total-count']
-  })
-  .catch(() => {
-    router.push({ name: 'NetworkError' })
-  })
+// StudentService.getStudent(5, props.page)
+//   .then((res: AxiosResponse<StudentItem[]>) => {
+//     students.value = res.data
+//     totalEvent.value = res.headers['x-total-count']
+//   })
+//   .catch(() => {
+//     router.push({ name: 'network-error' })
+//   })
 
-onBeforeRouteUpdate((to, from, next) => {
-  const toPage = Number(to.query.page)
-  StudentService.getStudent(5, toPage)
-    .then((res: AxiosResponse<StudentItem[]>) => {
-      students.value = res.data
-      totalEvent.value = res.headers['x-total-count']
-      next()
-    })
-    .catch(() => {
-      next({ name: 'NetworkError' })
-    })
-})
+// onBeforeRouteUpdate((to, from, next) => {
+//   const toPage = Number(to.query.page)
+//   StudentService.getStudent(5, toPage)
+//     .then((res: AxiosResponse<StudentItem[]>) => {
+//       students.value = res.data
+//       totalEvent.value = res.headers['x-total-count']
+//       next()
+//     })
+//     .catch(() => {
+//       next({ name: 'network-error' })
+//     })
+// })
 
-const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvent.value / 5)
-  return props.page.valueOf() < totalPages
-})
+// const hasNextPage = computed(() => {
+//   const totalPages = Math.ceil(totalEvent.value / 5)
+//   return props.page.valueOf() < totalPages
+// })
 </script>

@@ -8,6 +8,7 @@ import { useRouter } from 'vue-router'
 import { onBeforeRouteUpdate } from 'vue-router'
 
 const router = useRouter()
+const keyword = ref('')
 const students: Ref<Array<StudentItem>> = ref([])
 const totalEvent = ref<number>(0)
 const props = defineProps({
@@ -23,29 +24,56 @@ StudentService.getStudent(5, props.page)
     totalEvent.value = res.headers['x-total-count']
   })
   .catch(() => {
-    router.push({ name: 'NetworkError' })
+    router.push({ name: 'network-error' })
   })
 
 onBeforeRouteUpdate((to, from, next) => {
   const toPage = Number(to.query.page)
-  StudentService.getStudent(5, toPage)
-    .then((res: AxiosResponse<StudentItem[]>) => {
-      students.value = res.data
-      totalEvent.value = res.headers['x-total-count']
-      next()
-    })
-    .catch(() => {
-      next({ name: 'NetworkError' })
+ let queryFunction;
+ if (keyword.value === null || keyword.value === '') {
+   queryFunction = StudentService.getStudent(5, toPage)
+ } else {
+   queryFunction = StudentService.getStudentByKeyword(keyword.value, 5, toPage)
+ } queryFunction
+     .then(( res : AxiosResponse<StudentItem[]>) => {
+       students.value = res.data
+       totalEvent.value = res.headers['x-total-count']
+       next()
     })
 })
 
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvent.value / 5)
+  const totalPages = Math.ceil(totalEvent.value / 2)
   return props.page.valueOf() < totalPages
 })
+
+function updateKeyword (value: string) {
+  let queryFunction;
+  if (keyword.value === ''){
+    queryFunction = StudentService.getStudent(3, 1)
+  }else {
+    queryFunction = StudentService.getStudentByKeyword(keyword.value, 5, 1)
+  }
+  queryFunction.then((response: AxiosResponse<StudentItem[]>) => {
+    students.value = response.data
+    console.log('students',students.value)
+    totalEvent.value = response.headers['x-total-count']
+    console.log('totalEvent',totalEvent.value)
+  }).catch(() => {
+    router.push({ name: 'network-errorr' })
+  })
+}
 </script>
 <template>
   <main class="w-full h-full">
+    <BaseInput
+          v-model="keyword"
+          type="text"
+          label="Search..."
+          @input="updateKeyword"
+          class="w-full"
+      />
+
     <div class="w-full h-full HStack">
       <div class="VStack w-1/3 text-left align-middle justify-center">
         <RouterLink

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useMessageStore } from '@/stores/massage'
+import { useMessageStore } from '@/stores/message'
 
 const emit = defineEmits(['add-advisor'])
 
@@ -111,3 +111,4 @@ const submitInfo = () => {
   min-width: 120px;
 }
 </style>
+@/stores/message

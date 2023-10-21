@@ -23,7 +23,7 @@ AdvisorService.getAdvisor(3, props.page)
     totalAdvisor.value = res.headers['x-total-count']
   })
   .catch(() => {
-    router.push({ name: 'NetworkError' })
+    router.push({ name: 'network-error' })
   })
 
 onBeforeRouteUpdate((to, from, next) => {
@@ -35,7 +35,7 @@ onBeforeRouteUpdate((to, from, next) => {
       next()
     })
     .catch(() => {
-      next({ name: 'NetworkError' })
+      next({ name: 'network-error' })
     })
 })
 

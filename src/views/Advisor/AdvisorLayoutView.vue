@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import { useAdvisorStore } from '@/stores/advisor'
 import { storeToRefs } from 'pinia'
 import { useStudentStore } from '@/stores/student'
-import DataAdvisorService from '@/services/DataAdvisorService'
 import type { AdvisorItem, StudentItem } from '@/type'
 import type { Ref } from 'vue'
 import type { AxiosResponse } from 'axios'
@@ -14,17 +13,6 @@ const advisorStore = useAdvisorStore()
 const store = useStudentStore()
 const student = storeToRefs(store).student
 const advisors = storeToRefs(advisorStore).advisor
-
-
-// const id: number = student.value?.advisorId
-
-// DataAdvisorService.getStudentOfById(id)
-//     .then((res: AxiosResponse<StudentItem[]>) => {
-//       if (student.value?.advisorId == advisors.value?.id) {
-//         students.value = res.data
-//       }
-      
-//     })
 
 </script>
 

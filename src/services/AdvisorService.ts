@@ -1,16 +1,7 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosResponse } from 'axios'
-import type { AdvisorItem, StudentItem } from '@/type'
-
-const apiClient: AxiosInstance = axios.create({
-  baseURL: 'http://localhost:3004',
-  withCredentials: false,
-  headers: {
-    Accept: 'application/json',
-    'Content-Type': 'application/json'
-  }
-})
-
+import type { AdvisorItem } from '@/type'
+import apiClient from './AxiosClients'
 
 export default {
   getAdvisor(perPage: number, page: number): Promise<AxiosResponse<AdvisorItem[]>> {
@@ -18,5 +9,11 @@ export default {
   },
   getAdvisorById(id: number): Promise<AxiosResponse<AdvisorItem>> {
     return apiClient.get<AdvisorItem>('advisors/'+ id.toString())
+  },
+  saveAdvisor (advisor:AdvisorItem) : Promise<AxiosResponse<AdvisorItem>> {
+    return apiClient.post<AdvisorItem>('/advisors', advisor)
+  },
+  getOrganizersBy(): Promise<AxiosResponse<AdvisorItem[]>> {
+    return apiClient.get<AdvisorItem[]>(`/advisors`)
   }
 }
