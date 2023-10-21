@@ -100,6 +100,9 @@
   .window .text-primary {
     color: rgba(255, 255, 255, 0.96);
   }
+  .window .text-secondary {
+    color: rgba(255, 255, 255, 0.23);
+    color: #545454;  }
 
   .toolbar {
     left: 20%; /* Center the toolbar */
@@ -141,11 +144,22 @@
       0px -0.5px 1px 0px rgba(255, 255, 255, 0.3) inset;
   }
   .text-field::placeholder {
-    color: rgba(255, 255, 255, 0.23); 
+    color: rgba(255, 255, 255, 0.23);
     color: #545454;
   }
-  
-  
+  .secondary-button {
+    /* layout */
+    display: flex;
+    height: 44px;
+    padding: 0px 20px;
+    justify-content: center;
+    align-items: center;
+    /* style */
+    border-radius: 500px;
+    background: linear-gradient(0deg, rgba(94, 94, 94, 0.18) 0%, rgba(94, 94, 94, 0.18) 100%),
+      rgba(255, 255, 255, 0.06);
+    background-blend-mode: color-dodge, lighten;
+  }
 }
 
 @font-face {

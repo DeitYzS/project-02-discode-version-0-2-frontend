@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Uploader } from 'vue-media-upload'
+import Uploader from 'vue-media-upload'
 import { ref } from 'vue'
 
 interface Props {
@@ -36,5 +36,5 @@ const onChanged = (files: any) => {
 </script>
 
 <template>
-    <Uploader :server="uploadUrl" @change="onChanged" :media="media" max="1"></Uploader>
-</template>>
+    <Uploader class="bg-transparent" :server="uploadUrl" @change="onChanged" :media="media"></Uploader>
+</template>

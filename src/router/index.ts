@@ -20,6 +20,8 @@ import AdvisorListView from '@/views/AdvisorListView.vue'
 import StudentListView from '@/views/StudentListView.vue'
 import LoginView from '@/views/LoginView.vue'
 import RegisterView from '@/views/RegisterView.vue'
+import StudentFormView from '@/views/Add/StudentFormView.vue'
+import AdvisorFormView from '@/views/Add/AdvisorFormView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -57,6 +59,16 @@ const router = createRouter({
           name: 'advisor-list',
           component: AdvisorListView,
           props: (route) => ({page: parseInt(route.query?.page as  string || '1')})
+        },
+        {
+          path: '',
+          name: 'add-student',
+          component: StudentFormView
+        },
+        {
+          path: '',
+          name: 'add-advisor',
+          component: AdvisorFormView
         }
       ]
     },

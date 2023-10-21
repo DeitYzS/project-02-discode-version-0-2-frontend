@@ -68,28 +68,8 @@ function updateKeyword(value: string) {
 </script>
 <template>
   <main class="w-full h-full">
-    <div class="h-1/6 VStack w-full justify-center items-center align-middle">
-      <div class="HStack w-full">
-        <div class="w-1/3 flex items-center justify-start align-middle"></div>
-        <div class="w-1/3 flex items-center justify-center align-middle">
-          <p class="text-xl font-medium mt-4 p-4">Students</p>
-        </div>
-        <div class="w-1/3 flex items-center justify-end align-middle">
-
-          <RouterLink
-          :to="{ name: 'student-list', query: { page: page - 1 } }"
-          
-          class="hover:text-green-500 m-10 button-circle"
-        >
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" />
-</svg>
-
+    <div class="h-auto VStack w-full justify-center items-center align-middle ">
       
-      </RouterLink>
-     
-        </div>
-      </div>
       <div class="w-full justify-center HStack items-center align-middle">
         <TextField
           v-model="keyword"

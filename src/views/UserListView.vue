@@ -4,6 +4,60 @@
       <!-- Other content here -->
       <!-- <StudentCard v-for="student in students" :student="student" :key="student.id"></StudentCard> -->
       <!-- Display child components within the layout -->
+      <div class="HStack h-10 w-full mt-8 mb-8">
+        <div class="w-1/3 flex items-center justify-start align-middle">
+          <RouterLink
+            v-if="$route.name !== 'student-list' && $route.name !== 'advisor-list'"
+            class="hover:text-green-500 m-10 button-circle"
+            :to="{ name: 'student-list' }"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </RouterLink>
+        </div>
+        <div class="w-1/3 flex items-center justify-center align-middle">
+          <p class="text-xl font-medium mt-4 p-4">{{ routeText }}</p>
+        </div>
+        <div class="w-1/3 flex items-center justify-end align-middle">
+          <RouterLink
+          v-if="$route.name !== 'add-student' && $route.name !== 'add-advisor'"
+
+            class="hover:text-green-500 m-10 button-circle"
+            :to="{ name: $route.name === 'student-list' ? 'add-student' : 'add-advisor' }"
+            ><svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" /></svg
+          ></RouterLink>
+
+          <button
+          type="submit"
+          v-if="$route.name !== 'student-list' && $route.name !== 'advisor-list'"
+
+            class="hover:text-green-500 m-10 secondary-button"
+            :to="{ name: $route.name === 'student-list' ? 'add-student' : 'add-advisor' }"
+            >Done</button>
+
+
+
+        </div>
+      </div>
       <router-view></router-view>
       <div class="toolbar">
         <div class="HStack w-full h-full">
@@ -23,57 +77,26 @@
     </div>
   </main>
 </template>
-<style>
-
-
-@media only screen and (max-width: 600px) {
-
-}
-</style>
 
 <script setup lang="ts">
-// import type { StudentItem } from '@/type'
-// import StudentCard from '@/components/StudentCard.vue'
-// import { ref, type Ref, computed } from 'vue'
-// import StudentService from '@/services/StudentService'
-// import type { AxiosResponse } from 'axios'
-// import { useRouter } from 'vue-router'
-// import { onBeforeRouteUpdate } from 'vue-router'
 
-// const router = useRouter()
-// const students: Ref<Array<StudentItem>> = ref([])
-// const totalEvent = ref<number>(0)
-// const props = defineProps({
-//   page: {
-//     type: Number,
-//     required: true
-//   }
-// })
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 
-// StudentService.getStudent(5, props.page)
-//   .then((res: AxiosResponse<StudentItem[]>) => {
-//     students.value = res.data
-//     totalEvent.value = res.headers['x-total-count']
-//   })
-//   .catch(() => {
-//     router.push({ name: 'network-error' })
-//   })
+const route = useRoute()
 
-// onBeforeRouteUpdate((to, from, next) => {
-//   const toPage = Number(to.query.page)
-//   StudentService.getStudent(5, toPage)
-//     .then((res: AxiosResponse<StudentItem[]>) => {
-//       students.value = res.data
-//       totalEvent.value = res.headers['x-total-count']
-//       next()
-//     })
-//     .catch(() => {
-//       next({ name: 'network-error' })
-//     })
-// })
-
-// const hasNextPage = computed(() => {
-//   const totalPages = Math.ceil(totalEvent.value / 5)
-//   return props.page.valueOf() < totalPages
-// })
+// Define a computed property to set the text based on the route name
+const routeText = computed(() => {
+  if (route.name === 'student-list') {
+    return 'Students';
+  } else if (route.name === 'advisor-list') {
+    return 'Advisors';
+  } else if (route.name === 'add-student') {
+    return 'Add student';
+  } else if (route.name === 'add-advisor') {
+    return 'Add advisor';
+  } else {
+    return 'Something went wrong';
+  }
+});
 </script>

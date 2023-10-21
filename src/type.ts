@@ -3,7 +3,7 @@ export interface StudentItem {
     studentId: number,
     name:string,
     surname:string,
-    image:string,
+    image:string[],
     advisor: AdvisorItem
     comments: CommentItem[],
     course_list:string[]
@@ -15,7 +15,7 @@ export interface AdvisorItem {
     name:string,
     surname: string,
     email:string,
-    image:string,
+    image:string[],
     roles: string[]
 }
 
