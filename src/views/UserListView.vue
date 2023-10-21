@@ -24,34 +24,7 @@
   </main>
 </template>
 <style>
-.window {
-  width: 70%;
-  height: 720px;
-  border-radius: 46px;
-  border: 1px solid var(--windows-stroke-glass-specular, rgba(255, 255, 255, 0.4));
-  background: var(--windows-glass, rgba(128, 128, 128, 0.3));
-  background-blend-mode: luminosity;
 
-  /* Blur */
-  backdrop-filter: blur(50px);
-}
-
-.toolbar {
-  left: 20%; /* Center the toolbar */
-  right: 20%;
-  bottom: -34px;
-  position: absolute;
-  width: 58%; /* Set the width to be 60% of the window */
-  height: 68px;
-
-  border-radius: 100px;
-  border: 1.4px solid rgba(255, 255, 255, 0.4);
-  background: var(--windows-glass, rgba(128, 128, 128, 0.3));
-  background-blend-mode: luminosity;
-
-  /* Blur */
-  backdrop-filter: blur(50px);
-}
 
 @media only screen and (max-width: 600px) {
 

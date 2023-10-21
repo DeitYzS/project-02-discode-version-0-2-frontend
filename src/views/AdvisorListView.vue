@@ -6,7 +6,7 @@ import type { AxiosResponse } from 'axios'
 import { useRouter } from 'vue-router'
 import { onBeforeRouteUpdate } from 'vue-router'
 import AdvisorCard from '@/components/AdvisorCard.vue'
-
+import TextField from '@/components/TextField.vue'
 const router = useRouter()
 const advisors: Ref<Array<AdvisorItem>> = ref([])
 const totalAdvisor = ref<number>(0)
@@ -47,7 +47,20 @@ const hasNextPage = computed(() => {
 
 <template class="bg-black">
    <main class="w-full h-full">
-    <div class="w-full h-full HStack">
+    <div class="h-1/6 VStack w-full justify-center items-center align-middle">
+      <p class="text-xl font-medium mt-4 p-4">Students</p>
+      <div class="w-full justify-center HStack items-center align-middle">
+        <TextField
+          v-model="keyword"
+          type="text"
+          @input="updateKeyword"
+          class="w-full"
+          placeholder="Search"
+          label="Search"
+        />
+      </div>
+    </div>
+    <div class="w-full h-5/6 HStack">
       <div class="VStack w-1/3 text-left align-middle justify-center">
         <RouterLink
           :to="{ name: 'advisor-list', query: { page: page - 1 } }"

@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 @layer components {
   .HStack {
     @apply flex flex-row;
@@ -12,10 +11,13 @@
     @apply flex flex-col;
   }
   .font-primary {
-    font-family: "Good Times W00 Heavy";
+    font-family: 'Good Times W00 Heavy';
   }
   .font-secondary {
-    font-family: "Exe";
+    font-family: 'Exe';
+  }
+  .text-primary {
+    color: rgba(255, 255, 255, 0.23);
   }
   .herizontal-line {
     width: 100%; /* Adjust to set the length of the line */
@@ -24,26 +26,126 @@
     margin-top: 16px;
     margin-bottom: 16px;
   }
-  .vertical-line{
+  .vertical-line {
     width: 1px; /* Adjust to set the length of the line */
     height: 100%; /* Adjust to set the thickness of the line */
     background-color: #fff; /* Adjust to change the color of the line */
     margin-top: 16px;
     margin-bottom: 16px;
   }
-  .button-circle{
+  .button-circle {
     /* layout */
     display: flex;
-  width: 44px;
-  height: 44px;
-  justify-content: center;
-  align-items: center;
-  
-  /* style */
-  border-radius: 100px;
-  background: linear-gradient(0deg, rgba(94, 94, 94, 0.18) 0%, rgba(94, 94, 94, 0.18) 100%), rgba(255, 255, 255, 0.06);
-  background-blend-mode: color-dodge, lighten;
+    width: 44px;
+    height: 44px;
+    justify-content: center;
+    align-items: center;
+
+    /* style */
+    border-radius: 100px;
+    background: linear-gradient(0deg, rgba(94, 94, 94, 0.18) 0%, rgba(94, 94, 94, 0.18) 100%),
+      rgba(255, 255, 255, 0.06);
+    background-blend-mode: color-dodge, lighten;
   }
+  .window {
+    /* layout */
+    display: flex;
+    width: 70%;
+    height: 720px;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    position: relative;
+
+    /* style */
+    border-radius: 46px;
+
+    background: var(--windows-glass, rgba(128, 128, 128, 0.3));
+
+    background-blend-mode: luminosity;
+
+    /* Blur */
+    backdrop-filter: blur(50px);
+  }
+
+  .window::before,
+  .window::after,
+  .window::nth-child(2),
+  .window::nth-child(3) {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: inherit;
+  }
+
+  .window::before {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .window::after {
+    border: 1px solid rgba(255, 255, 255, 0.01);
+  }
+
+  .window::nth-child(2) {
+    border: 1px solid rgba(255, 255, 255, 0.01);
+  }
+
+  .window::nth-child(3) {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .window .text-primary {
+    color: rgba(255, 255, 255, 0.96);
+  }
+
+  .toolbar {
+    left: 20%; /* Center the toolbar */
+    right: 20%;
+    bottom: -34px;
+    position: absolute;
+    width: 58%; /* Set the width to be 60% of the window */
+    height: 68px;
+
+    border-radius: 100px;
+    border: 1.4px solid rgba(255, 255, 255, 0.4);
+    background: var(--windows-glass, rgba(128, 128, 128, 0.3));
+    background-blend-mode: luminosity;
+
+    /* Blur */
+    backdrop-filter: blur(50px);
+  }
+  .text-field {
+    /* layout */
+    display: flex;
+    height: 44px;
+    padding: 0px 8px;
+    align-items: center;
+    gap: 8px;
+    align-self: stretch;
+
+    /* style */
+    border-radius: 12px;
+    background: var(
+      --Recessed,
+      linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%),
+      rgba(208, 208, 208, 0.5)
+    );
+    background-blend-mode: luminosity, color-burn;
+    box-shadow:
+      1px 1.5px 4px 0px rgba(0, 0, 0, 0.1) inset,
+      1px 1.5px 4px 0px rgba(0, 0, 0, 0.08) inset,
+      0px -0.5px 1px 0px rgba(255, 255, 255, 0.25) inset,
+      0px -0.5px 1px 0px rgba(255, 255, 255, 0.3) inset;
+  }
+  .text-field::placeholder {
+    color: rgba(255, 255, 255, 0.23); 
+    color: #545454;
+  }
+  
+  
 }
 
 @font-face {
