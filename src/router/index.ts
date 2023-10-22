@@ -73,20 +73,7 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: RegisterView,
-      // children: [
-      //   {
-      //     path: '',
-      //     name: 'student-register',
-      //     component: StudentRegisterView,
-      //     props: true
-      //   },
-      //   {
-      //     path: '',
-      //     name: 'advisor-register',
-      //     component: AdvisorRegisterView,
-      //     props: true
-      //   }
-      // ]
+
     },
     {
       path: '/student/:id',
@@ -158,16 +145,7 @@ const router = createRouter({
       },
     ]
     },
-    {
-      path: '/add-student',
-      name: 'add-student',
-      component: StudentFormView
-    },
-    // {
-    //   path: '/add-advisor',
-    //   name: 'add-advisor',
-    //   component: 
-    // },
+
     {
       path: '/404/:resource',
       name: '404-resource',
