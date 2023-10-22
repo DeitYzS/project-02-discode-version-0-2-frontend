@@ -28,7 +28,8 @@ const student = ref<StudentItem>({
     surname: ' ',
     email: '',
     images:[],
-    roles: []
+    roles: [],
+    studentList:[],
   },
   comments: [],
   course_list: [],

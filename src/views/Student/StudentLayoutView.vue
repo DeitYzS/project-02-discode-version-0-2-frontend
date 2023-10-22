@@ -5,23 +5,58 @@ import { useAdvisorStore } from '@/stores/advisor'
 import { ref } from 'vue'
 import type { StudentItem } from '@/type'
 import type { PropType } from 'vue'
-const editMode = ref(false)
+import TextField from '@/components/TextField.vue'
+import StudentService from '@/services/StudentService'
 
-const advisorStore = useAdvisorStore()
 const store = useStudentStore()
 const { student } = storeToRefs(store)
-const advisor = storeToRefs(advisorStore).advisor
 const id = ref(student.value?.id)
 
+const editMode = ref(false)
+const editingName = ref(false)
+const editingLastname = ref(false)
 
 const toggleEditMode = () => {
   editMode.value = !editMode.value
+  if (!editMode.value) {
+    editingName.value = false
+    editingLastname.value = false
+    updateStudent()
+  }
+}
+
+const updateStudent = async () => {
+  if (student.value && id.value !== undefined) {
+    const updatedProperties = {
+      name: student.value.name,
+      surname: student.value.surname
+    }
+    console.log('Updating student with', updatedProperties)
+
+    StudentService.updateStudent(id.value, updatedProperties)
+      .then((response) => {
+        console.log('Student updated successfully', response.data)
+      })
+      .catch((error) => {
+        console.error('Failed to update student', error)
+      })
+  }
+}
+
+const editingStudentName = () => {
+  editingName.value = true
+  editMode.value = true
+}
+
+const editingStudentLastname = () => {
+  editingLastname.value = true
+  editMode.value = true
 }
 
 defineProps({
   students: {
     type: Object as PropType<StudentItem>,
-    require: true
+    required: true
   }
 })
 </script>
@@ -51,38 +86,92 @@ defineProps({
           </div>
           <div class="VStack justify-center">
             <button
-          type="submit"
-          class="hover:text-green-500 m-10 secondary-button"
-          :class="{ shaking: editMode }"
-          @click="toggleEditMode"
-        >
-          {{ editMode ? 'Done' : 'Edit' }}
-        </button>
+              type="submit"
+              class="hover:text-green-500 m-10 secondary-button"
+              :class="{ shaking: editMode }"
+              @click="toggleEditMode"
+            >
+              {{ editMode ? 'Done' : 'Edit' }}
+            </button>
           </div>
         </div>
       </div>
       <div class="VStack md:HStack md:safe-area">
         <div v-if="student" class="VStack safe-area md:w-1/2">
           <p class="text-2xl font-secondary">Student</p>
+
           <p class="font-bold text-lg editable" :class="{ shaking: editMode }">
             {{ student.studentId }}
           </p>
-          <h1
-            class="text-left text-5xl font-medium black font-primary editable"
-            :class="{ shaking: editMode }"
-          >
-            {{ student.name }} {{ student.surname }} <br />
-            <span class="text-left text-lg font-light font-sans">
-              <!-- <div v-if="student?.advisor.id"> -->
-                <!-- Advisor: {{ student?.advisor.name }} {{student?.advisor.surname}}<br /> -->
-              <!-- </div> -->
-              <!-- <div v-else> -->
-                <!-- Advisor: Not have -->
-              <!-- </div> -->
-              Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
-              <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
-            </span>
+
+          <h1 class="text-left text-5xl font-medium black font-primary">
+            <div>
+              <div class="HStack">
+                <div v-if="!editingName" class="editable" :class="{ shaking: editMode }">
+                  {{ student.name }}
+                </div>
+                <div v-if="editMode && editingName">
+                  <TextField v-model="student.name" @keyup.enter="updateStudent" />
+                </div>
+                <div v-if="editMode && !editingName">
+                  <button class="hover:text-green-500 button-circle" @click="editingStudentName">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="HStack">
+                <div v-if="!editingLastname" class="editable" :class="{ shaking: editMode }">
+                  {{ student.surname }}
+                </div>
+                <div v-if="editMode && editingLastname">
+                  <TextField v-model="student.surname" @keyup.enter="updateStudent" />
+                </div>
+                <div v-if="editMode && !editingLastname">
+                  <button
+                    class="hover:text-green-500 button-circle"
+                    @click="editingStudentLastname"
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="w-6 h-6"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
           </h1>
+          <span class="text-left text-lg font-light font-sans">
+            <div v-if="student?.advisor.id">
+              Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
+            </div>
+            <div v-else>Advisor: Not have</div>
+            <!-- Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br /> -->
+            <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
+          </span>
         </div>
         <div class="HStack md:w-1/2 md:justify-end">
           <div class="VStack md:justify-end">
@@ -132,41 +221,39 @@ button {
   margin: 0;
 }
 
-
-
 .editable.shaking {
   animation: jiggle 0.2s infinite;
   -webkit-animation: jiggle 0.2s infinite;
   -moz-animation: jiggle 0.2s infinite;
   -moz-animation-duration: 0.2s;
   animation-duration: 0.2s;
-  -webkit-transform: rotate(-1deg);
-  -moz-transform: rotate(-1deg);
+  -webkit-transform: rotate(-0.5deg);
+  -moz-transform: rotate(-0.5deg);
 }
 @keyframes jiggle {
-    0% {
-        transform: rotate(-1deg);
-	}
-	50% {
-    	transform: rotate(1deg);
-	}
+  0% {
+    transform: rotate(-0.5deg);
+  }
+  50% {
+    transform: rotate(0.5deg);
+  }
 }
 
 @-webkit-keyframes jiggle {
-    0% {
-        -webkit-transform: rotate(-1deg);
-	}
-	50% {
-    	-webkit-transform: rotate(1deg);
-	}
+  0% {
+    -webkit-transform: rotate(-0.5deg);
+  }
+  50% {
+    -webkit-transform: rotate(0.5deg);
+  }
 }
 
 @-moz-keyframes jiggle {
-    0% {
-        -moz-transform: rotate(-1deg);
-	}
-	50% {
-		-moz-transform: rotate(1deg);
-	}
+  0% {
+    -moz-transform: rotate(-0.5deg);
+  }
+  50% {
+    -moz-transform: rotate(0.5deg);
+  }
 }
 </style>

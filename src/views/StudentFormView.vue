@@ -28,7 +28,7 @@
       <h3>Who is your Advisor?</h3>
       <label>Select an Advisor</label>
       <BaseSelect
-			label="Organizer"
+			label="Advisor"
 			v-model="student.advisor!.id"
 			:options="advisor"
 			:key-extractor="(x) => x.id"
@@ -83,7 +83,8 @@ const student = ref<StudentItem>({
     surname: '',
     email: '',
     images: [],
-    roles: []
+    roles: [],
+    studentList:[],
   },
   comments: [
     {
