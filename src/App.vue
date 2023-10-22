@@ -34,22 +34,21 @@ function logout() {
         <h4>{{ message }}</h4>
       </div>
 
+      <!-- Toolbar item -->
       <nav class="container mx-auto px-4" id="nav">
         <div class="HStack justify-between" id="logo">
+          <!-- left side -->
+
           <div class="logo">
             <router-link to="/"
               ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
             >
           </div>
 
+          <!-- rigth side -->
           <div class="font-base space-x-4 flex flex-row">
-
             <div id="nav" class="flex flex-row ml-8 space-x-2">
-              <router-link to="/userlist">Users</router-link>
-              <span v-if="authStore.isAdmin"> |
-                <router-link :to="{ name: 'add-student' }">Reg Student</router-link> |
-                <!-- <router-link :to="{ name: 'add-advisor' }">Reg Register</router-link> -->
-              </span>
+              <router-link to="/userlist">Users list</router-link>
             </div>
 
             <nav>
