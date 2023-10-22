@@ -2,14 +2,14 @@
 import type { StudentItem } from '@/type'
 import type { PropType } from 'vue'
 
-defineProps({ stuednt: { type: Object as PropType<StudentItem>, required: true } })
+defineProps({ student: { type: Object as PropType<StudentItem>, required: true } })
 </script>
 
 <template>
-  <div v-if="stuednt">
-    <img :src="stuednt.image" alt="Event Image" />
-    <p>{{ stuednt.name }} {{ stuednt.surname }}</p>
-    <p>#{{ stuednt.id }}</p>
+  <div v-if="student">
+    <img :src="student.image" alt="Event Image" />
+    <p>{{ student.name }} {{ student.surname }}</p>
+    <p>#{{ student.id }}</p>
     <p>
       <svg
         xmlns="http://www.w3.org/2000/svg"

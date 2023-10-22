@@ -10,6 +10,9 @@ import TextField from '@/components/TextField.vue'
 const router = useRouter()
 const advisors: Ref<Array<AdvisorItem>> = ref([])
 const totalAdvisor = ref<number>(0)
+const keyword = ref('')
+const totalEvent = ref<number>(0)
+
 const props = defineProps({
   page: {
     type: Number,
@@ -43,12 +46,29 @@ const hasNextPage = computed(() => {
   const totalPages = Math.ceil(totalAdvisor.value / 3)
   return props.page.valueOf() < totalPages
 })
+function updateKeyword(value: string) {
+  let queryFunction
+  if (keyword.value === '') {
+    queryFunction = AdvisorService.getAdvisor(3, 1)
+  } else {
+    queryFunction = AdvisorService.getAdvisorByKeyword(keyword.value, 5, 1)
+  }
+  queryFunction
+    .then((response: AxiosResponse<AdvisorItem[]>) => {
+      advisors.value = response.data
+      console.log('students', advisors.value)
+      totalEvent.value = response.headers['x-total-count']
+      console.log('totalEvent', totalEvent.value)
+    })
+    .catch(() => {
+      router.push({ name: 'network-errorr' })
+    })
+}
 </script>
 
 <template class="bg-black">
-   <main class="w-full h-full">
-    <div class="h-1/6 VStack w-full justify-center items-center align-middle">
-      <p class="text-xl font-medium mt-4 p-4">Students</p>
+  <main class="w-full h-full">
+    <div class="h-auto VStack w-full justify-center items-center align-middle">
       <div class="w-full justify-center HStack items-center align-middle">
         <TextField
           v-model="keyword"
@@ -83,8 +103,11 @@ const hasNextPage = computed(() => {
       </div>
       <div class="w-1/3 flex items-center justify-center">
         <div class="VStack items-center justify-center">
-          <AdvisorCard v-for="advisor in advisors" :advisor="advisor" :key="advisor.id"></AdvisorCard>
-
+          <AdvisorCard
+            v-for="advisor in advisors"
+            :advisor="advisor"
+            :key="advisor.id"
+          ></AdvisorCard>
         </div>
       </div>
 

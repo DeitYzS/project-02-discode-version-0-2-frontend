@@ -36,5 +36,5 @@ const onChanged = (files: any) => {
 </script>
 
 <template>
-    <Uploader class="bg-transparent" :server="uploadUrl" @change="onChanged" :media="media"></Uploader>
+    <Uploader class="bg-transparent" :server="uploadUrl" @change="onChanged" :media="media" max="1"></Uploader>
 </template>

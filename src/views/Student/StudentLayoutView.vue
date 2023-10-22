@@ -3,13 +3,23 @@ import { useStudentStore } from '@/stores/student'
 import { storeToRefs } from 'pinia'
 import { useAdvisorStore } from '@/stores/advisor'
 import { ref } from 'vue'
+import type { StudentItem } from '@/type'
+import type { PropType } from 'vue'
 
 const advisorStore = useAdvisorStore()
 const store = useStudentStore()
 const { student } = storeToRefs(store)
 const advisor = storeToRefs(advisorStore).advisor
 const id = ref(student.value?.id)
+
+defineProps({
+  students: {
+    type: Object as PropType<StudentItem>,
+    require: true
+  }
+})
 </script>
+
 <template>
   <main class="container mx-auto px-4">
     <div class="VStack h-screen">
@@ -25,9 +35,15 @@ const id = ref(student.value?.id)
             </span>
           </h1>
         </div>
-        <div v-if="student" class="HStack md:w-1/2 md:justify-end">
+        <div class="HStack md:w-1/2 md:justify-end">
           <div class="VStack md:justify-end">
-            <img :src="student.image" class="profile rounded-lg" alt="User Image" />
+            <img
+              v-for="image in students?.image"
+              :key="image"
+              :src="image"
+              alt="student image"
+              class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40 hover:shadow-lg"
+            />
           </div>
         </div>
       </div>

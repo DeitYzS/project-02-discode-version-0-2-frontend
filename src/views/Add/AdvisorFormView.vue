@@ -1,118 +1,91 @@
-<!-- <script setup lang="ts">
+<script setup lang="ts">
+import type { AdvisorItem } from "@/type";
 import { ref } from "vue";
-import EventService from "@/services/EventService";
-
+import AdvisorService from "@/services/AdvisorService";
 import { useRouter } from "vue-router";
 import { useMessageStore } from "@/stores/message";
-import type { EventItem } from "@/type";
-import type { Organiser } from "@/type";
-import OrganiserService from "@/services/OrganiserService";
-import * as Axios from "axios"; // Import Axios for the function
-
-import type { AxiosResponse } from "axios"; // Import AxiosResponse as a type
-import BaseInput from "@/components/BaseInput.vue";
-import BaseSelect from "@/components/BaseSelect.vue";
 import ImageUpload from "@/components/ImageUpload.vue";
-const store = useMessageStore();
-const router = useRouter();
-const organisers = ref<Organiser[]>([]);
+import TextField from "@/components/TextField.vue";
+const store = useMessageStore()
+const router = useRouter()
 
-OrganiserService.getOrganisersBy()
-  .then((response: AxiosResponse<Organiser[]>) => {
-    organisers.value = response.data;
-  })
-  .catch(() => {
-    router.push({ name: "network-error" });
-  });
 
-const event = ref<EventItem>({
-  category: " ",
-  date: " ",
-  description: " ",
+
+const advisor =ref<AdvisorItem> ({
   id: 0,
-  location: " ",
-  organiser: {
-    id: 0,
-    name: " ",
-    address: " ",
-    images: [],
-    roles: [],
-  },
-  time: " ",
-  title: " ",
-  images: [],
-});
+  name: ' ',
+  surname: ' ',
+  email:' ',
+  image: [],
+  roles: [],
+})
 
-function saveEvent() {
-  EventService.saveEvent(event.value).then((res) => {
-    console.log(res.data);
-    router
-      .push({
-        name: "event-detail",
-        params: { id: res.data.id },
+function  saveAdvisor() {
+  AdvisorService.saveAdvisor(advisor.value)
+      .then((res) => {
+        console.log(res.data)
+        router.push({
+          name: 'advisor-detail',
+          params: { id: res.data.id }
+        }) . catch(() => {
+          router.push({ name: 'network-error' })
+        })
+
+        store.updateMessage('You are successfully add a new event for' + res.data.name)
+        setTimeout(() => {
+          store.resetMessage()
+        }, 3000)
       })
-      .catch(() => {
-        router.push({ name: "network-error" });
-      });
-
-    store.updateMessage(
-      "You are successfully add a new event for" + res.data.title
-    );
-    setTimeout(() => {
-      store.resetMessage();
-    }, 3000);
-  });
 }
-</script> -->
+
+</script>
 <template>
-    <!-- <h1>Create an event</h1>
-  
-    <form @submit.prevent="saveEvent">
-      <BaseInput v-model="event.category" type="text" label="Category" />
-  
-      <h3>Name & descirb your event</h3>
-  
-      <BaseInput v-model="event.title" type="text" label="Title" />
-  
-      <label>Description</label>
-  
-      <BaseInput
-        v-model="event.description"
-        type="text"
-        placeholder="Description"
-        class="field"
-      />
-  
-      <h3>Where is your event?</h3>
-  
-      <label>Location</label>
-  
-      <BaseInput
-        v-model="event.location"
-        type="text"
-        placeholder="Location"
-        class="field"
-      />
-  
-      <h3>Who is your organiser?</h3>
-      <label>Select an Organiser</label>
-      <BaseSelect
-        v-model="event.organiser.id"
-        label="Organiser"
-        :options="organisers"
-      />
-  
-      <h3>The image of the Event</h3>
-      <ImageUpload v-model="event.images" />
-  
-      <button type="submit" class="bg-blue-500 p-4 rounded-lg">Submit</button>
-    </form>
-  
-    <pre>{{ event }}</pre> -->
-    <!-- </div> -->
-    a
-  </template>
-  <style>
-  
-  </style>
-  
+ <main class="h-full w-full">
+    <div class="VStack w-full text-center items-center justify-center align-middle">
+      <form @submit.prevent="saveAdvisor">
+        <button type="submit" class="bg-blue-500 p-4 m-6 rounded-lg">Submit</button>
+
+        <div class="VStack gap-12">
+          <div class="VStack justify-center md:HStack">
+            <div class="VStack items-center">
+              <label class="pb-2 tex">Firstname</label>
+              <TextField
+                class="text-field text-left mx-auto"
+                v-model="advisor.name"
+                type="text"
+                label="Firstname"
+              />
+            </div>
+            <div class="VStack items-center">
+              <label class="pb-2">Surname</label>
+              <TextField
+                class="text-left mx-auto"
+                v-model="advisor.surname"
+                type="text"
+              />
+            </div>
+          </div>
+          <div class="VStack gap-4">
+            <h3 class="text-left">Email</h3>
+            <TextField
+                class="text-left mx-auto"
+                v-model="advisor.email"
+                type="text"
+              />
+          </div>
+          
+          <div class="VStack gap-4">
+            <p>Profile upload</p>
+            <ImageUpload v-model="advisor.image" />
+          </div>
+        </div>
+
+      </form>
+
+      <!-- <pre>{{ student }}</pre> -->
+    </div>
+  </main>
+</template>
+<style>
+
+</style>

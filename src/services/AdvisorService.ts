@@ -15,5 +15,9 @@ export default {
   },
   getAdvisorBy(): Promise<AxiosResponse<AdvisorItem[]>> {
     return apiClient.get<AdvisorItem[]>(`/advisors`)
+  },
+  getAdvisorByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<AdvisorItem[]>> {
+    return apiClient.get<AdvisorItem[]>('/advisors?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
+
   }
 }
