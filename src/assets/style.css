@@ -102,7 +102,66 @@
   }
   .window .text-secondary {
     color: rgba(255, 255, 255, 0.23);
-    color: #545454;  }
+    color: #545454;
+  }
+  .window-ignore {
+    /* layout */
+    display: flex;
+    width: 100%;
+    min-height: 720px;
+    height: auto;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-shrink: 0;
+    position: relative;
+
+    /* style */
+    border-radius: 23px;
+
+    background: var(--windows-glass, rgba(128, 128, 128, 0.3));
+
+    background-blend-mode: luminosity;
+
+    /* Blur */
+    backdrop-filter: blur(50px);
+  }
+
+  .window-ignore::before,
+  .window-ignore::after,
+  .window-ignore::nth-child(2),
+  .window-ignore::nth-child(3) {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: inherit;
+  }
+
+  .window-ignore::before {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+
+  .window-ignore::after {
+    border: 1px solid rgba(255, 255, 255, 0.01);
+  }
+
+  .window-ignore::nth-child(2) {
+    border: 1px solid rgba(255, 255, 255, 0.01);
+  }
+
+  .window-ignore::nth-child(3) {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .window-ignore .text-primary {
+    color: rgba(255, 255, 255, 0.96);
+  }
+  .window-ignore .text-secondary {
+    color: rgba(255, 255, 255, 0.23);
+    color: #545454;
+  }
 
   .toolbar {
     left: 20%; /* Center the toolbar */

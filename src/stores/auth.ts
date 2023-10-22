@@ -27,7 +27,13 @@ export const useAuthStore = defineStore('auth', {
         return this.student?.name || this.advisor?.name || ''
     },
     isAdmin() :boolean {
-        return this.advisor?.roles.includes('ROLE_ADMIN') || false
+        return this.advisor?.roles.includes('ROLE_ADMIN') ||  this.student?.roles.includes('ROLE_ADMIN')  || false
+    },
+    isStudent() :boolean {
+        return this.advisor?.roles.includes('ROLE_STUDENT') ||  this.student?.roles.includes('ROLE_STUDENT')  || false
+    },
+    isAdvisor() :boolean {
+        return this.advisor?.roles.includes('ROLE_ADVISOR') ||  this.student?.roles.includes('ROLE_ADVISOR')  || false
     }
 
  },

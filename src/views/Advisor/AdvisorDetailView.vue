@@ -6,5 +6,5 @@ defineProps({ student: { type: Object as PropType<StudentItem>, required: true }
 </script>
 
 <template>
-    detailadvisor
+    detail advisor
 </template>

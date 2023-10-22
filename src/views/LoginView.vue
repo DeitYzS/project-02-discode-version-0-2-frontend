@@ -101,7 +101,16 @@ const onSubmit = handleSubmit((values) => {
   .login(values.username, values.password) 
   .then(() => {
     console.log('login success');
-    router.push({ name: 'student-list'})
+    if (authStore.isStudent){
+      router.push({ name: 'student-list'})
+    }else if (authStore.isAdmin){
+      router.push({ name: 'student-list'})
+    }else if (authStore.isAdvisor){
+      router.push({ name: 'advisor-detail'})
+    }else{
+      router.push({ name: 'home-view'})
+
+    }
   }).catch((err) => {
     messageStore.updateMessage('could not login')
     setTimeout(() => {

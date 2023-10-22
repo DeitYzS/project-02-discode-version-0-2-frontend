@@ -1,6 +1,6 @@
 import axios from 'axios'
 import type { AxiosInstance, AxiosResponse } from 'axios'
-import type { AdvisorItem } from '@/type'
+import type { AdvisorItem, StudentItem } from '@/type'
 import apiClient from './AxiosClients'
 
 export default {
@@ -19,5 +19,11 @@ export default {
   getAdvisorByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<AdvisorItem[]>> {
     return apiClient.get<AdvisorItem[]>('/advisors?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
 
-  }
+  },
+  // getAdvisee(advisorId: number, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
+  //   return apiClient.get<StudentItem[]>('/students?_limit=' + perPage + '&_page=' + page + '&advisorId=' + advisorId);
+  // },
+  // getAdviseeByKeyword(advisorId: number, keyword: string, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
+  //   return apiClient.get<StudentItem[]>('/students?title=' + keyword + '&_limit=' + perPage + '&_page=' + page + '&advisorId=' + advisorId);
+  // }
 }

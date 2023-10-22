@@ -8,6 +8,7 @@ import type { PropType } from 'vue'
 const advisorStore = useAdvisorStore()
 const advisor = storeToRefs(advisorStore).advisor
 
+
 defineProps({
   advisors: {
     type: Object as PropType<AdvisorItem>,
@@ -46,26 +47,24 @@ defineProps({
 
       <div class="herizontal-line"></div>
 
-
-      <!-- <div class="HStack flex items-center justify-center">
-        <div class="VStack w-1/2 flex items-center justify-center">
-          <RouterLink class="hover:text-red-400" :to="{ name: 'student-detail' }"
-            ><p class="text-xl">Detail</p>
-          </RouterLink>
+      <section class="window-ignore p-4">
+        <div class="HStack flex items-center justify-center w-full">
+          <div class="VStack w-1/2 flex items-center justify-center">
+            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-detail' }"
+              ><p class="text-xl">Detail</p>
+            </RouterLink>
+          </div>
+          <div class="vertical-line"></div>
+          <div class="VStack w-1/2 flex items-center justify-center">
+            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-advisee' }">
+              <p class="text-xl">Advisee</p>
+            </RouterLink>
+          </div>
         </div>
-        <div class="vertical-line"></div>
-        <div class="VStack w-1/2 flex items-center justify-center">
-          <RouterLink class="hover:text-red-400" :to="{ name: 'student-comment' }">
-            <p class="text-xl">Comments</p>
-          </RouterLink>
-        </div>
-      </div> -->
 
-
-
-
-      <!-- Display child components within the layout -->
-      <router-view></router-view>
+        <!-- Display child components within the layout -->
+        <router-view></router-view>
+      </section>
     </div>
   </main>
 </template>
