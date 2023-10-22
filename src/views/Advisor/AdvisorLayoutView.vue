@@ -71,7 +71,7 @@ defineProps({
 
 <style scoped>
 .safe-area {
-  padding-top: 500px;
+  padding-top: 300px;
 }
 .profile {
   width: auto;
