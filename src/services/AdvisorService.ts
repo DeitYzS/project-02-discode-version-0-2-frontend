@@ -18,7 +18,9 @@ export default {
   },
   getAdvisorByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<AdvisorItem[]>> {
     return apiClient.get<AdvisorItem[]>('/advisors?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
-
+  },
+  updateStudent(id: number): Promise<AxiosResponse<AdvisorItem>> {
+    return apiClient.put<AdvisorItem>('advisors/'+ id.toString())
   },
   // getAdvisee(advisorId: number, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
   //   return apiClient.get<StudentItem[]>('/students?_limit=' + perPage + '&_page=' + page + '&advisorId=' + advisorId);

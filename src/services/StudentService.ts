@@ -16,5 +16,8 @@ export default {
   getStudentByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
     return apiClient.get<StudentItem[]>('/students?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
   },
+  updateStudent(id: number): Promise<AxiosResponse<StudentItem>> {
+    return apiClient.put<StudentItem>('students/'+ id.toString())
+  },
  
 }

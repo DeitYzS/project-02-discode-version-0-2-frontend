@@ -62,7 +62,7 @@ const onSubmit = handleSubmit((values) => {
     <form action="#" method="POST" @submit.prevent="onSubmit">
       <div class="my-5">
         <h5>StudentID</h5>
-        <InputText type="password" v-model="studentId" :error="errors['studentId']"></InputText>
+        <InputText type="text" v-model="studentId" :error="errors['studentId']"></InputText>
       </div>
       <div class="my-5">
         <h5>Username</h5>
