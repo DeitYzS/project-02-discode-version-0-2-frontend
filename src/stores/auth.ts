@@ -133,7 +133,40 @@ export const useAuthStore = defineStore('auth', {
             localStorage.setItem('student', JSON.stringify(this.student))
             return res
           })
+      },
+    
+      registerAdvisor(
+        email: string,
+        password: string,
+        username: string,
+        firstname: string,
+        lastname: string
+      ) {
+        return apiClient
+          .post('/api/v1/auth/registerStudent', {
+            username,
+            email,
+            password,
+            firstname,
+            lastname
+          })
+          .then((res) => {
+            this.token = res.data.access_token
+            console.log(res.data.user)
+            this.student = {
+                id: res.data.user.id,
+                name: res.data.user.name,
+                address: res.data.user.address,
+                images: res.data.user.images,
+                roles: res.data.user.roles
+            } as unknown as StudentItem
+            localStorage.setItem('access_token', this.token as string)
+            localStorage.setItem('student', JSON.stringify(this.student))
+            return res
+          })
       }
+
+
 
     }
  }

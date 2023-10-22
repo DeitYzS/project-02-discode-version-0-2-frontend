@@ -17,6 +17,7 @@ export interface AdvisorItem {
     email:string,
     images:string[],
     roles: string[]
+    studentList:string[]
 }
 
 export interface CommentItem {

@@ -73,7 +73,7 @@ function logout() {
                   </li>
                 </ul>
 
-                <!-- <ul v-if="authStore.currentUserName" class="flex navbar-nav ml-auto"> -->
+                <ul v-if="authStore.currentUserName" class="flex navbar-nav ml-auto">
                   <li class="nav-item px-2">
                     <router-link to="/profile" class="nav-link">
                       <font-awesome-icon icon="user" />
@@ -86,7 +86,7 @@ function logout() {
                       <font-awesome-icon icon="sign-out-alt"></font-awesome-icon> Logout
                     </a>
                   </li>
-                <!-- </ul> -->
+                </ul>
               </nav>
             </nav>
           </div>
