@@ -21,10 +21,13 @@ export const useAuthStore = defineStore('auth', {
  }),
 
  getters: {
-    currentUserName() : string {
+    currentUserNameStudent() : string {
         console.log(this.student?.name);
+        return this.student?.name || ''
+    },
+    curretUserNameAdvisor() : string {
         console.log(this.advisor?.name);  
-        return this.student?.name || this.advisor?.name || ''
+        return this.advisor?.name || ''
     },
     isAdmin() :boolean {
         return this.advisor?.roles.includes('ROLE_ADMIN') ||  this.student?.roles.includes('ROLE_ADMIN')  || false

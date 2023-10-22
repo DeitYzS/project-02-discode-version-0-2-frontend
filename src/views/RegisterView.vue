@@ -11,6 +11,7 @@ const authStore = useAuthStore()
 const messageStore = useMessageStore()
 
 const validationSchema = yup.object({
+  studentId:yup.string().required('The student ID is required'),
   username: yup.string().required('The email is required'),
   password: yup.string().required('The password is required'),
   firstname: yup.string().required('The firstname is required'),
@@ -35,7 +36,7 @@ const { value: password } = useField<string>('password')
 const { value: firstname } = useField<string>('firstname')
 const { value: lastname } = useField<string>('lastname')
 const { value: username } = useField<string>('username')
-const { value: studentId } = useField<string>('studentId')
+const { value: studentId } = useField<number>('studentId')
 
 const onSubmit = handleSubmit((values) => {
   console.log(values)
