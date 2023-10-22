@@ -16,7 +16,7 @@ const advisor =ref<AdvisorItem> ({
   name: ' ',
   surname: ' ',
   email:' ',
-  image: [],
+  images: [],
   roles: [],
 })
 

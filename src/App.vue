@@ -10,9 +10,13 @@ const router = useRouter()
 const store = useMessageStore()
 const { message } = storeToRefs(store)
 const token = localStorage.getItem('token')
-const user = localStorage.getItem('user')
-if (token && user) {
-  authStore.reload(token, JSON.parse(user))
+const student = localStorage.getItem('student')
+const advisor = localStorage.getItem('advisor')
+
+if (token && student) {
+  authStore.reloadStudent(token, JSON.parse(student))
+} else if (token && advisor) {
+  authStore.reloadAdvisor(token, JSON.parse(advisor))
 } else {
   authStore.logout()
 }
@@ -30,52 +34,61 @@ function logout() {
         <h4>{{ message }}</h4>
       </div>
 
-      <nav class="container mx-auto px-4 ">
+      <nav class="container mx-auto px-4" id="nav">
         <div class="HStack justify-between" id="logo">
           <div class="logo">
-            <RouterLink to="/"
-              ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></RouterLink
+            <router-link to="/"
+              ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
             >
           </div>
 
-  
           <div class="font-base space-x-4 flex flex-row">
-            <RouterLink to="/userlist">Users</RouterLink>
 
-            <ul v-if="!authStore.currentUserName" class="flex navbar-nav ml-auto">
-              
-              <li class="nav-item px-2 ">
-                <ul class="flex flex-row">
-                  <li class="nav-item px-2 ">
-                    <router-link to="/register" class="nav-link">
-                      <font-awesome-icon icon="user-plus" />Sign Up |
-                    </router-link>
-                  </li>
+            <div id="nav" class="flex flex-row ml-8 space-x-2">
+              <router-link to="/userlist">Users</router-link>
+              <span v-if="authStore.isAdmin"> |
+                <router-link :to="{ name: 'add-student' }">Reg Student</router-link> |
+                <!-- <router-link :to="{ name: 'add-advisor' }">Reg Register</router-link> -->
+              </span>
+            </div>
 
-                  <li>
-                    <router-link to="/login" class="nav-link">
-                      <font-awesome-icon icon="sign-in" /> Login 
-                    </router-link>
+            <nav>
+              <nav class="flex">
+                <ul v-if="!authStore.currentUserName" class="flex navbar-nav ml-auto">
+                  <li class="nav-item px-2">
+                    <ul class="flex flex-row">
+                      <li class="nav-item px-2">
+                        <router-link to="/register" class="nav-link">
+                          <font-awesome-icon icon="user-plus" /> Sign Up
+                        </router-link>
+                        |
+                      </li>
+
+                      <li>
+                        <router-link to="/login" class="nav-link">
+                          <font-awesome-icon icon="sign-in" /> Login
+                        </router-link>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
-              </li>
-            </ul>
 
-            <ul v-if="authStore.currentUserName" class="flex navbar-nav ml-auto flex-row">
-              <li class="nav-item px-2">
-                <router-link to="/profile" class="nav-link">
-                  <font-awesome-icon icon="user" />
-                  {{ authStore.currentUserName }} |
-                </router-link>
-              </li>
+                <!-- <ul v-if="authStore.currentUserName" class="flex navbar-nav ml-auto"> -->
+                  <li class="nav-item px-2">
+                    <router-link to="/profile" class="nav-link">
+                      <font-awesome-icon icon="user" />
+                      {{ authStore.currentUserName }} |
+                    </router-link>
+                  </li>
 
-              <li class="nav-item px-2">
-                <a class="nav-link hover:cursor-pointer" @click="logout">
-                  <font-awesome-icon icon="sign-out-alt"></font-awesome-icon> Logout
-                </a>
-              </li>
-            </ul>
-  
+                  <li class="nav-item px-2">
+                    <a class="nav-link hover:cursor-pointer" @click="logout">
+                      <font-awesome-icon icon="sign-out-alt"></font-awesome-icon> Logout
+                    </a>
+                  </li>
+                <!-- </ul> -->
+              </nav>
+            </nav>
           </div>
         </div>
       </nav>

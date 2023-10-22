@@ -21,13 +21,13 @@ const student = ref<StudentItem>({
   studentId: 0,
   name: ' ',
   surname: ' ',
-  image: [],
+  images: [],
   advisor: {
     id: 0,
     name: ' ',
     surname: ' ',
     email: '',
-    image:[],
+    images:[],
     roles: []
   },
   comments: [],

@@ -38,7 +38,7 @@ defineProps({
         <div class="HStack md:w-1/2 md:justify-end">
           <div class="VStack md:justify-end">
             <img
-              v-for="image in students?.image"
+              v-for="image in students?.images"
               :key="image"
               :src="image"
               alt="student image"
