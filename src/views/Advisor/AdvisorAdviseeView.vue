@@ -13,7 +13,7 @@ import { useAdvisorStore } from '@/stores/advisor'
 import { storeToRefs } from 'pinia'
 
 const students: Ref<Array<StudentItem>> = ref([])
-    
+
 const totalEvent = ref<number>(0)
 const advisorStore = useAdvisorStore()
 const advisor = storeToRefs(advisorStore).advisor
@@ -50,11 +50,6 @@ onBeforeRouteUpdate((to, from, next) => {
   })
 })
 
-const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvent.value / 5)
-  return props.page.valueOf() < totalPages
-})
-
 function updateKeyword(value: string) {
   let queryFunction
   if (keyword.value === '') {
@@ -74,13 +69,13 @@ function updateKeyword(value: string) {
     })
 }
 const adviseeStudents = computed(() => {
-  return students.value.filter(student => student.advisor.id === advisorID);
-});
+  return students.value.filter((student) => student.advisor.id === advisorID)
+})
 </script>
 <template>
   <!-- Stage -->
-  <main class="w-full h-full mt-8">
-    <div class="h-auto VStack w-full justify-center items-center align-middle">
+  <main class="w-full h-full ">
+    <div class="h-1/6 VStack w-full justify-center items-center align-middle">
       <div class="w-full justify-center HStack items-center align-middle">
         <TextField
           v-model="keyword"
@@ -94,12 +89,13 @@ const adviseeStudents = computed(() => {
     </div>
 
     <div class="w-full h-5/6 HStack">
-      
-      <div class="VStack w-full justify-center items-center align-middle">
-        <StudentCard v-for="student in adviseeStudents" :student="student" :key="student.id"></StudentCard>
+      <div class="VStack w-full justify-center items-center align-middle p-4">
+        <StudentCard
+          v-for="student in adviseeStudents"
+          :student="student"
+          :key="student.id"
+        ></StudentCard>
       </div>
-
-      
     </div>
   </main>
 </template>
