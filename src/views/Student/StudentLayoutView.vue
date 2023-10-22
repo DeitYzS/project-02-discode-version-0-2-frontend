@@ -30,7 +30,7 @@ defineProps({
           <h1 class="text-left text-5xl font-medium black font-primary">
             {{ student.name }} {{ student.surname }} <br />
             <span class="text-left text-lg font-light font-sans">
-              Advisor: {{ advisor?.name }} <br />
+              Advisor: {{ student?.advisor.name }} {{student?.advisor.surname}}<br />
               <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
             </span>
           </h1>
@@ -38,7 +38,7 @@ defineProps({
         <div class="HStack md:w-1/2 md:justify-end">
           <div class="VStack md:justify-end">
             <img
-              v-for="image in students?.images"
+              v-for="image in students?.images[0]"
               :key="image"
               :src="image"
               alt="student image"
