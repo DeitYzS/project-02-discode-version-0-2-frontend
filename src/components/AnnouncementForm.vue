@@ -1,7 +1,14 @@
 <template>
+
+
+<div class="window-base mt-4">
+  <div v-if="status" class="VStack items-center align-middle justify-center h-full">
+    <p class="text-white text-3xl mt-4">Done!</p>
+</div>
   <form
+    v-if="!status"
     id="announcementForm"
-    class="window-base rounded-lg shadow-sm p-2 mt-4"
+    class="rounded-lg shadow-sm p-2 mt-4"
     @submit.prevent="submitAnnouncement"
   >
     <div class="VStack relative gap-2 p-4">
@@ -29,8 +36,9 @@
       </div>
     </div>
   </form>
+</div>
+  
 </template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import announcementService from '@/services/AnnocementService'
@@ -38,6 +46,7 @@ import { useAuthStore } from '@/stores/auth'
 import type { AdvisorItem } from '@/type'
 const authStore = useAuthStore()
 
+const status = ref(false)
 const newAnnouncementTitle = ref('')
 const newAnnouncementText = ref('')
 
@@ -52,18 +61,26 @@ const submitAnnouncement = async () => {
   try {
     const response = await announcementService.saveComment(announcement)
     console.log(response)
+    status.value = true
+    newAnnouncementTitle.value = ''
+    newAnnouncementText.value = ''
+
+    setTimeout(() => {
+      status.value = false
+    }, 3000) // Change status back to false after 3 seconds
   } catch (error) {
     console.error(error)
   }
 }
 </script>
-
 <style scoped>
 #commentForm {
   text-decoration: none;
   /* max-width: 500px; */
 }
-.text-primary{
+.text-primary,
+input::placeholder,
+textarea::placeholder {
   color: rgba(255, 255, 255, 1);
 }
 .secondary-button {
@@ -77,5 +94,8 @@ const submitAnnouncement = async () => {
 
   /* Blur */
   backdrop-filter: blur(50px);
+}
+.window-base{
+  min-height: 300px;
 }
 </style>
