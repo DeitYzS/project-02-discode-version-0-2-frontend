@@ -1,46 +1,101 @@
 <template>
-    <form id="commentForm" class="window-base rounded-lg shadow-sm p-2 mt-4">
-      <div class="VStack relative">
-        <!-- <textarea class="window-secondary h-36 rounded-md" v-model="newCommentText"></textarea> -->
-        <div class="HStack absolute bottom-0 right-0">
-          <!-- <input class="secondary-button " type="button" value="Announcement" @click="submitComment" /> -->
-        </div>
+
+
+<div class="window-base mt-4">
+  <div v-if="status" class="VStack items-center align-middle justify-center h-full">
+    <p class="text-white text-3xl mt-4">Done!</p>
+</div>
+  <form
+    v-if="!status"
+    id="announcementForm"
+    class="rounded-lg shadow-sm p-2 mt-4"
+    @submit.prevent="submitAnnouncement"
+  >
+    <div class="VStack relative gap-2 p-4">
+      <p class="text-xl font-medium">Title</p>
+      <input
+        type="text"
+        class="window-secondary rounded-md text-primary"
+        v-model="newAnnouncementTitle"
+        placeholder="Enter your title here"
+      />
+      <p class="text-xl font-medium">Description</p>
+
+      <textarea
+        class="window-secondary h-36 rounded-md text-primary"
+        v-model="newAnnouncementText"
+        placeholder="Enter your announcement here"
+      ></textarea>
+      <div class="HStack absolute bottom-5 right-5">
+        <input
+          class="secondary-button"
+          type="button"
+          value="Save Announcement"
+          @click="submitAnnouncement"
+        />
       </div>
-    </form>
-  </template>
+    </div>
+  </form>
+</div>
   
-  <script setup lang="ts">
-  
-  </script>
-  
-  
-  <style scoped>
-  #commentForm {
-    text-decoration: none;
-    /* max-width: 500px; */
+</template>
+<script setup lang="ts">
+import { ref } from 'vue'
+import announcementService from '@/services/AnnocementService'
+import { useAuthStore } from '@/stores/auth'
+import type { AdvisorItem } from '@/type'
+const authStore = useAuthStore()
+
+const status = ref(false)
+const newAnnouncementTitle = ref('')
+const newAnnouncementText = ref('')
+
+const submitAnnouncement = async () => {
+  const announcement = {
+    id: 0,
+    title: newAnnouncementTitle.value,
+    description: newAnnouncementText.value,
+    advisor: authStore.advisor as AdvisorItem
   }
-  
-  .ocean-blue {
-    background-color: #1b9ff4;
-    color: white;
-    min-width: 87px;
+
+  try {
+    const response = await announcementService.saveComment(announcement)
+    console.log(response)
+    status.value = true
+    newAnnouncementTitle.value = ''
+    newAnnouncementText.value = ''
+
+    setTimeout(() => {
+      status.value = false
+    }, 3000) // Change status back to false after 3 seconds
+  } catch (error) {
+    console.error(error)
   }
-  
-  .ocean-blue:hover {
-    scale: 1.1;
-  }
-  
-  .secondary-button{
-    border-radius: 10px;
-    margin: 10px;
-     /* style */
-  
+}
+</script>
+<style scoped>
+#commentForm {
+  text-decoration: none;
+  /* max-width: 500px; */
+}
+.text-primary,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 1);
+}
+.secondary-button {
+  border-radius: 10px;
+  margin: 10px;
+  /* style */
+
   background: var(--windows-glass, rgba(0, 0, 0, 0.3));
-  
+
   background-blend-mode: luminosity;
-  
+
   /* Blur */
   backdrop-filter: blur(50px);
-  }
-  </style>
-  
+}
+.window-base{
+  min-height: 300px;
+}
+</style>

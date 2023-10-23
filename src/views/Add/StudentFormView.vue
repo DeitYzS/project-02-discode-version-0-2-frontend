@@ -101,7 +101,7 @@ function saveStudent() {
               />
           </div>
           <div class="VStack gap-4">
-            <h3>Who is your organiser?</h3>
+            <h3>Who is your Advisor?</h3>
             <div class="HStack justify-center md:justify-between ">
               <label class="hidden md:block">Advisor</label>
               <Picker

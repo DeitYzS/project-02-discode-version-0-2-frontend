@@ -12,15 +12,18 @@ const student = studentStore.student // assuming this is how you get the current
 
 const announcements: Ref<Array<AnnItem>> = ref([])
 
-AnnouncementService.getCommentBy()
+  AnnouncementService.getCommentBy()
   .then((res: AxiosResponse<AnnItem[]>) => {
+    console.log('All announcements:', res.data) // Log all announcements
+
     // Filter the announcements to include only those by the student's advisor
     announcements.value = res.data.filter(announcement => announcement.advisor.id === student?.advisor.id)
-    console.log(announcements.value)
+    console.log('Filtered announcements:', announcements.value) // Log filtered announcements
   })
   .catch(() => {
     router.push({ name: 'network-error' })
   })
+
 </script>
 
 <template>
