@@ -48,15 +48,15 @@ function handleScroll() {
         <div class="HStack justify-between" id="logo">
           <!-- left side -->
 
-          <div class="logo">
+          <div class="logo VStack justify-center">
             <router-link to="/"
               ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
             >
           </div>
 
           <!-- rigth side -->
-          <div class="font-base space-x-4 flex flex-row">
-            <div v-if="authStore.isAdmin" class="flex flex-row ml-8 space-x-2">
+          <div class="font-base space-x-4 flex flex-row ">
+            <div v-if="authStore.isAdmin" class="VStack justify-center ml-8 space-x-2">
               <router-link to="/userlist">Users list</router-link>
             </div>
             <div v-if="authStore.isAdvisor" class="flex flex-row ml-8 space-x-2">
@@ -92,7 +92,7 @@ function handleScroll() {
                   class="flex navbar-nav ml-auto secondary-button"
                 >
                   <li class="nav-item px-2 ">
-                    <router-link to="/profile" class="nav-link">
+                    <router-link to="/profile" class="nav-link font-secondary">
                       <font-awesome-icon icon="user" />
                       <div v-if="authStore.isAdmin">
                         {{ 'ADMIN' }}
