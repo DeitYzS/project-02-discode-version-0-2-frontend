@@ -4,7 +4,7 @@ import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-
+import { onMounted, ref } from 'vue'
 const authStore = useAuthStore()
 const router = useRouter()
 const store = useMessageStore()
@@ -12,6 +12,7 @@ const { message } = storeToRefs(store)
 const token = localStorage.getItem('token')
 const student = localStorage.getItem('student')
 const advisor = localStorage.getItem('advisor')
+const isScrolled = ref(false)
 
 if (token && student) {
   authStore.reloadStudent(token, JSON.parse(student))
@@ -25,17 +26,25 @@ function logout() {
   authStore.logout()
   router.push({ name: 'login' })
 }
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+function handleScroll() {
+  // Update isScrolled based on the scroll position
+  isScrolled.value = window.scrollY > 0
+}
 </script>
 
 <template>
   <div class="bg-container text-white">
-    <header class="p-4 sticky top-0 z-10">
+    <header class="p-4 sticky top-0 z-10 " :class="{ 'bg-color': isScrolled }">
       <div id="flashMessage" v-if="message">
         <h4>{{ message }}</h4>
       </div>
 
       <!-- Toolbar item -->
-      <nav class="container mx-auto px-4" id="nav">
+      <nav class="container mx-auto px-4 " id="nav">
         <div class="HStack justify-between" id="logo">
           <!-- left side -->
 
@@ -55,7 +64,7 @@ function logout() {
             </div>
 
             <nav>
-              <nav class="flex">
+              <nav class="flex justify-center">
                 <ul
                   v-if="!authStore.currentUserNameStudent && !authStore.curretUserNameAdvisor"
                   class="flex navbar-nav ml-auto"
@@ -80,9 +89,9 @@ function logout() {
 
                 <ul
                   v-if="authStore.currentUserNameStudent || authStore.curretUserNameAdvisor"
-                  class="flex navbar-nav ml-auto"
+                  class="flex navbar-nav ml-auto secondary-button"
                 >
-                  <li class="nav-item px-2">
+                  <li class="nav-item px-2 ">
                     <router-link to="/profile" class="nav-link">
                       <font-awesome-icon icon="user" />
                       <div v-if="authStore.isAdmin">
@@ -116,6 +125,15 @@ function logout() {
 </template>
 
 <style scoped>
+.secondary-button{
+  margin: 0;
+}
+.bg-color {
+  background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.1)); /* Adjust the opacity values as needed */
+  backdrop-filter: blur(10px); 
+}
+
+
 .bg-container::before {
   content: '';
   position: fixed;
