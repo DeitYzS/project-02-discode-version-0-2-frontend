@@ -27,7 +27,10 @@ const { errors, handleSubmit } = useForm({
     password: '',
     firstname: '',
     lastname: '',
-    email: ''
+    email: '',
+    advisor: {
+      
+    }
   }
 })
 
