@@ -116,7 +116,7 @@ function saveStudent() {
           </div>
           <div class="VStack gap-4">
             <p>Profile upload</p>
-            <ImageUpload v-model="student.image" />
+            <ImageUpload v-model="student.images" />
           </div>
         </div>
 

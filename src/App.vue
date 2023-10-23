@@ -79,7 +79,12 @@ function logout() {
                   <li class="nav-item px-2">
                     <router-link to="/profile" class="nav-link">
                       <font-awesome-icon icon="user" />
-                      {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
+                      <div v-if="authStore.isAdmin">
+                        {{ "ADMIN" }}
+                      </div>
+                      <div v-else>
+                        {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
+                      </div>
                     </router-link>
                   </li>
 
