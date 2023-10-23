@@ -7,11 +7,14 @@ import type { StudentItem } from '@/type'
 import type { PropType } from 'vue'
 import TextField from '@/components/TextField.vue'
 import StudentService from '@/services/StudentService'
-
+import Picker from '@/components/PickerField.vue'
+import type { AdvisorItem } from '@/type'
+const advisors = ref<AdvisorItem[]>([])
+import AdvisorService from '@/services/AdvisorService'
 const store = useStudentStore()
 const { student } = storeToRefs(store)
 const id = ref(student.value?.id)
-
+const editingAdvisor = ref(false)
 const editMode = ref(false)
 const editingName = ref(false)
 const editingLastname = ref(false)
@@ -21,6 +24,7 @@ const toggleEditMode = () => {
   if (!editMode.value) {
     editingName.value = false
     editingLastname.value = false
+    editingAdvisor.value = false
     updateStudent()
   }
 }
@@ -29,7 +33,8 @@ const updateStudent = async () => {
   if (student.value && id.value !== undefined) {
     const updatedProperties = {
       name: student.value.name,
-      surname: student.value.surname
+      surname: student.value.surname,
+      advisor: student.value.advisor
     }
     console.log('Updating student with', updatedProperties)
 
@@ -42,9 +47,20 @@ const updateStudent = async () => {
       })
   }
 }
-
+AdvisorService.getAdvisorBy()
+  .then((response: AxiosResponse<AdvisorItem[]>) => {
+    advisors.value = response.data
+  })
+  .catch(() => {
+    router.push({ name: 'network-error' })
+  })
 const editingStudentName = () => {
   editingName.value = true
+  editMode.value = true
+}
+
+const editingStudentadvisor = () => {
+  editingAdvisor.value = true
   editMode.value = true
 }
 
@@ -111,7 +127,7 @@ defineProps({
                   {{ student.name }}
                 </div>
                 <div v-if="editMode && editingName">
-                  <TextField v-model="student.name" @keyup.enter="updateStudent" />
+                  <TextField v-model="student.name" />
                 </div>
                 <div v-if="editMode && !editingName">
                   <button class="hover:text-green-500 button-circle" @click="editingStudentName">
@@ -138,7 +154,7 @@ defineProps({
                   {{ student.surname }}
                 </div>
                 <div v-if="editMode && editingLastname">
-                  <TextField v-model="student.surname" @keyup.enter="updateStudent" />
+                  <TextField v-model="student.surname" />
                 </div>
                 <div v-if="editMode && !editingLastname">
                   <button
@@ -165,10 +181,43 @@ defineProps({
             </div>
           </h1>
           <span class="text-left text-lg font-light font-sans">
-            <div v-if="student?.advisor.id">
-              Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
+            <div class="HStack">
+              <div v-if="!editingAdvisor" class="editable" :class="{ shaking: editMode }">
+                <div v-if="student?.advisor.id">
+                  Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
+                </div>
+                <div v-else>Advisor: Not have</div>
+              </div>
+              <div v-if="editMode && editingAdvisor">
+                <Picker
+                  class="text-white"
+                  v-model="student.advisor.id"
+                  :options="advisors"
+                  :keyExtractor="(advisor) => advisor.id"
+                  :valueExtractor="(advisor) => advisor.id"
+                  :textExtractor="(advisor) => `${advisor.name} ${advisor.surname}`"
+                />
+              </div>
+              <div v-if="editMode && !editingAdvisor">
+                <button class="hover:text-green-500 button-circle" @click="editingStudentadvisor">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                    />
+                  </svg>
+                </button>
+              </div>
             </div>
-            <div v-else>Advisor: Not have</div>
+
             <!-- Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br /> -->
             <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
           </span>
