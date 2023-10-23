@@ -56,7 +56,10 @@ function logout() {
 
             <nav>
               <nav class="flex">
-                <ul v-if="!authStore.currentUserNameStudent && !authStore.curretUserNameAdvisor" class="flex navbar-nav ml-auto">
+                <ul
+                  v-if="!authStore.currentUserNameStudent && !authStore.curretUserNameAdvisor"
+                  class="flex navbar-nav ml-auto"
+                >
                   <li class="nav-item px-2">
                     <ul class="flex flex-row">
                       <li class="nav-item px-2">
@@ -75,12 +78,15 @@ function logout() {
                   </li>
                 </ul>
 
-                <ul v-if="authStore.currentUserNameStudent || authStore.curretUserNameAdvisor" class="flex navbar-nav ml-auto">
+                <ul
+                  v-if="authStore.currentUserNameStudent || authStore.curretUserNameAdvisor"
+                  class="flex navbar-nav ml-auto"
+                >
                   <li class="nav-item px-2">
                     <router-link to="/profile" class="nav-link">
                       <font-awesome-icon icon="user" />
                       <div v-if="authStore.isAdmin">
-                        {{ "ADMIN" }}
+                        {{ 'ADMIN' }}
                       </div>
                       <div v-else>
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |

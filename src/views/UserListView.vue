@@ -31,8 +31,7 @@
         </div>
         <div class="w-1/3 flex items-center justify-end align-middle">
           <RouterLink
-          v-if="$route.name !== 'add-student' && $route.name !== 'add-advisor'"
-
+            v-if="$route.name !== 'add-student' && $route.name !== 'add-advisor'"
             class="hover:text-green-500 m-10 button-circle"
             :to="{ name: $route.name === 'student-list' ? 'add-student' : 'add-advisor' }"
             ><svg
@@ -47,15 +46,13 @@
           ></RouterLink>
 
           <button
-          type="submit"
-          v-if="$route.name !== 'student-list' && $route.name !== 'advisor-list'"
-
+            type="submit"
+            v-if="$route.name !== 'student-list' && $route.name !== 'advisor-list'"
             class="hover:text-green-500 m-10 secondary-button"
             :to="{ name: $route.name === 'student-list' ? 'add-student' : 'add-advisor' }"
-            >Done</button>
-
-
-
+          >
+            Done
+          </button>
         </div>
       </div>
       <router-view></router-view>
@@ -79,7 +76,6 @@
 </template>
 
 <script setup lang="ts">
-
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 
@@ -88,15 +84,15 @@ const route = useRoute()
 // Define a computed property to set the text based on the route name
 const routeText = computed(() => {
   if (route.name === 'student-list') {
-    return 'Students';
+    return 'Students'
   } else if (route.name === 'advisor-list') {
-    return 'Advisors';
+    return 'Advisors'
   } else if (route.name === 'add-student') {
-    return 'Add student';
+    return 'Add student'
   } else if (route.name === 'add-advisor') {
-    return 'Add advisor';
+    return 'Add advisor'
   } else {
-    return 'Something went wrong';
+    return 'Something went wrong'
   }
-});
+})
 </script>

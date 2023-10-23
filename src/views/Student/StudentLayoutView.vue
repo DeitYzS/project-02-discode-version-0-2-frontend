@@ -13,6 +13,8 @@ import AdvisorService from '@/services/AdvisorService'
 import type { AdvisorItem } from '@/type'
 import router from '@/router'
 import type { AxiosResponse } from 'axios'
+import * as yup from 'yup'
+import { useField, useForm } from 'vee-validate'
 const advisors = ref<AdvisorItem[]>([])
 const store = useStudentStore()
 const { student } = storeToRefs(store)
@@ -22,7 +24,7 @@ const editMode = ref(false)
 const editingName = ref(false)
 const editingLastname = ref(false)
 const editingPicture = ref(false)
-
+const editingSTD = ref(false)
 const toggleEditMode = () => {
   editMode.value = !editMode.value
   if (!editMode.value) {
@@ -30,17 +32,37 @@ const toggleEditMode = () => {
     editingLastname.value = false
     editingAdvisor.value = false
     editingPicture.value = false
-
+    editingSTD.value = false
     updateStudent()
   }
 }
 
+const validationSchema = yup.object({
+  studentId:yup.string().required('The student ID is required'),
+  name: yup.string().required('The firstname is required'),
+  surname: yup.string().required('The lastname is required'),
+})
+
+
+const { errors, handleSubmit } = useForm({
+  validationSchema,
+  initialValues: {
+    studentId: student.value?.studentId,
+    name: student.value?.name,
+    surname: student.value?.surname,
+  }
+})
+
+const { value: studentId } = useField<string>('studentId')
+  const { value: name } = useField<string>('name')
+    const { value: surname } = useField<string>('surname')
 
 const updateStudent = async () => {
   if (student.value && id.value !== undefined) {
     const updatedProperties = {
       name: student.value.name,
       surname: student.value.surname,
+      studentId: student.value.studentId,
       advisor: student.value.advisor
     }
     console.log('Updating student with', updatedProperties)
@@ -71,16 +93,20 @@ const editingStudentpicture = () => {
   editMode.value = true
 }
 
-const editingStudentadvisor = () => {
-  editingAdvisor.value = true
-  editMode.value = true
-}
+// const editingStudentadvisor = () => {
+//   editingAdvisor.value = true
+//   editMode.value = true
+// }
 
 const editingStudentLastname = () => {
   editingLastname.value = true
   editMode.value = true
 }
 
+const editingStudentID = () => {
+  editingSTD.value = true
+  editMode.value = true
+}
 defineProps({
   students: {
     type: Object as PropType<StudentItem>,
@@ -128,9 +154,34 @@ defineProps({
         <div v-if="student" class="VStack safe-area md:w-1/2">
           <p class="text-2xl font-secondary">Student</p>
 
-          <p class="font-bold text-lg editable" :class="{ shaking: editMode }">
-            {{ student.studentId }}
-          </p>
+          <div class="HStack">
+            <div v-if="!editingSTD" class="editable" :class="{ shaking: editMode }">
+              <p class="font-bold text-lg editable" :class="{ shaking: editMode }">
+                {{ student.studentId }}
+              </p>
+            </div>
+            <div v-if="editMode && editingSTD">
+              <TextField v-model="student.studentId"  :error="errors['studentId']" />
+            </div>
+            <div v-if="editMode && !editingSTD">
+              <button class="hover:text-green-500 button-circle" @click="editingStudentID">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
 
           <h1 class="text-left text-5xl font-medium black font-primary">
             <div>
@@ -139,7 +190,7 @@ defineProps({
                   {{ student.name }}
                 </div>
                 <div v-if="editMode && editingName">
-                  <TextField v-model="student.name" />
+                  <TextField v-model="student.name"  :error="errors['name']" />
                 </div>
                 <div v-if="editMode && !editingName">
                   <button class="hover:text-green-500 button-circle" @click="editingStudentName">
@@ -166,7 +217,7 @@ defineProps({
                   {{ student.surname }}
                 </div>
                 <div v-if="editMode && editingLastname">
-                  <TextField v-model="student.surname" />
+                  <TextField v-model="student.surname"  :error="errors['surname']"/>
                 </div>
                 <div v-if="editMode && !editingLastname">
                   <button
@@ -193,11 +244,11 @@ defineProps({
             </div>
           </h1>
           <span class="text-left text-lg font-light font-sans">
-            <div class="HStack">
-              <div v-if="!editingAdvisor" class="editable" :class="{ shaking: editMode }">
-                <div v-if="student?.advisor.id">
+            <!-- <div class="HStack">
+              <div v-if="!editingAdvisor">
+                <div v-if="student?.advisor.id"> -->
                   Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
-                </div>
+                <!-- </div>
                 <div v-else>Advisor: Not have</div>
               </div>
               <div v-if="editMode && editingAdvisor">
@@ -209,8 +260,8 @@ defineProps({
                   :valueExtractor="(advisor) => advisor.id"
                   :textExtractor="(advisor) => `${advisor.name} ${advisor.surname}`"
                 />
-              </div>
-              <div v-if="editMode && !editingAdvisor">
+              </div> -->
+              <!-- <div v-if="editMode && !editingAdvisor">
                 <button class="hover:text-green-500 button-circle" @click="editingStudentadvisor">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -227,8 +278,8 @@ defineProps({
                     />
                   </svg>
                 </button>
-              </div>
-            </div>
+              </div> -->
+            <!-- </div> -->
 
             <!-- Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br /> -->
             <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
@@ -256,7 +307,7 @@ defineProps({
                 </button>
               </div>
               <div v-if="editMode && editingPicture">
-                <!-- <ImageUpload v-model="student.images" /> -->
+                <!-- <ImageUpload v-model="student?.images" /> -->
                 Not available in you region
               </div>
 

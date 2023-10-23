@@ -18,7 +18,7 @@ const store = useMessageStore()
 const router = useRouter()
 const student = ref<StudentItem>({
   id: 0,
-  studentId: 0,
+  studentId: '',
   name: ' ',
   surname: ' ',
   images: [],

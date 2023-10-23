@@ -1,6 +1,6 @@
 export interface StudentItem {
     id: number,
-    studentId: number,
+    studentId: String,
     name:string,
     surname:string,
     images:string[],
