@@ -4,7 +4,7 @@ import { useMessageStore } from '@/stores/message'
 import { storeToRefs } from 'pinia'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
-
+import { onMounted, ref } from 'vue'
 const authStore = useAuthStore()
 const router = useRouter()
 const store = useMessageStore()
@@ -12,14 +12,11 @@ const { message } = storeToRefs(store)
 const token = localStorage.getItem('token')
 const student = localStorage.getItem('student')
 const advisor = localStorage.getItem('advisor')
+const isScrolled = ref(false)
 
 if (token && student) {
   authStore.reloadStudent(token, JSON.parse(student))
-}else {
-  authStore.logout()
-}
-
-if (token && advisor) {
+} else if (token && advisor) {
   authStore.reloadAdvisor(token, JSON.parse(advisor))
 } else {
   authStore.logout()
@@ -29,11 +26,19 @@ function logout() {
   authStore.logout()
   router.push({ name: 'login' })
 }
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+function handleScroll() {
+  // Update isScrolled based on the scroll position
+  isScrolled.value = window.scrollY > 0
+}
 </script>
 
 <template>
   <div class="bg-container text-white">
-    <header class="p-4 sticky top-0 z-10">
+    <header class="p-4 sticky top-0 z-10" :class="{ 'bg-color': isScrolled }">
       <div id="flashMessage" v-if="message">
         <h4>{{ message }}</h4>
       </div>
@@ -43,7 +48,7 @@ function logout() {
         <div class="HStack justify-between" id="logo">
           <!-- left side -->
 
-          <div class="logo">
+          <div class="logo VStack justify-center">
             <router-link to="/"
               ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
             >
@@ -51,16 +56,22 @@ function logout() {
 
           <!-- rigth side -->
           <div class="font-base space-x-4 flex flex-row">
-            <div v-if="authStore.isAdmin" class="flex flex-row ml-8 space-x-2">
+            <div
+              v-if="authStore.isAdmin || authStore.isAdvisor"
+              class="VStack justify-center ml-8 space-x-2"
+            >
               <router-link to="/userlist">Users list</router-link>
             </div>
-            <div v-if="authStore.isAdvisor" class="flex flex-row ml-8 space-x-2">
+            <!-- <div v-if="authStore.isAdvisor" class="VStack justify-center ml-8 space-x-2">
               <router-link to="/userlist">Users list</router-link>
-            </div>
+            </div> -->
 
             <nav>
-              <nav class="flex">
-                <ul v-if="!authStore.currentUserNameStudent && !authStore.curretUserNameAdvisor" class="flex navbar-nav ml-auto">
+              <nav class="flex justify-center">
+                <ul
+                  v-if="!authStore.currentUserNameStudent && !authStore.curretUserNameAdvisor"
+                  class="flex navbar-nav ml-auto"
+                >
                   <li class="nav-item px-2">
                     <ul class="flex flex-row">
                       <li class="nav-item px-2">
@@ -79,12 +90,15 @@ function logout() {
                   </li>
                 </ul>
 
-                <ul v-if="authStore.currentUserNameStudent || authStore.curretUserNameAdvisor" class="flex navbar-nav ml-auto">
+                <ul
+                  v-if="authStore.currentUserNameStudent || authStore.curretUserNameAdvisor"
+                  class="flex navbar-nav ml-auto secondary-button"
+                >
                   <li class="nav-item px-2">
-                    <router-link to="/profile" class="nav-link">
+                    <router-link to="/profile" class="nav-link font-secondary">
                       <font-awesome-icon icon="user" />
                       <div v-if="authStore.isAdmin">
-                        {{ "ADMIN" }}
+                        {{ 'ADMIN' }}
                       </div>
                       <div v-else>
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
@@ -114,6 +128,17 @@ function logout() {
 </template>
 
 <style scoped>
+.secondary-button {
+  margin: 0;
+}
+.bg-color {
+  background: linear-gradient(
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.1)
+  ); /* Adjust the opacity values as needed */
+  backdrop-filter: blur(10px);
+}
+
 .bg-container::before {
   content: '';
   position: fixed;

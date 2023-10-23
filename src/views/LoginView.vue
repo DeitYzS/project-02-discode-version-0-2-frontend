@@ -17,9 +17,8 @@
               <InputText type="text" v-model="username" :error="errors['username']"></InputText>
             </div>
 
-
             <div class="VStack">
-              <div class="HStack justify-between items-center justify-center align-middle">
+              <div class="HStack justify-between items-center align-middle">
                 <label for="password"> Password </label>
                 <div class="text-sm">
                   <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500">
@@ -29,7 +28,6 @@
               </div>
               <InputText type="password" v-model="password" :error="errors['password']"></InputText>
             </div>
-
 
             <div>
               <button
@@ -85,16 +83,16 @@ const onSubmit = handleSubmit((values) => {
     .login(values.username, values.password)
     .then(() => {
       console.log('login success')
-      // if (authStore.isStudent) {
-      //   router.push({ name: 'student-list' })
-      // } else if (authStore.isAdmin) {
-      //   router.push({ name: 'student-list' })
-      // } else if (authStore.isAdvisor) {
-      //   router.push({ name: 'advisor-detail' })
-      // } else {
-      //   router.push({ name: 'home-view' })
-      // }
-      router.push({ name: 'home-view'})
+      if (authStore.isStudent) {
+        router.push({ name: 'student-detail', params: { id: authStore.student?.id } })
+      } else if (authStore.isAdmin) {
+        router.push({ name: 'student-list' })
+      } else if (authStore.isAdvisor) {
+        router.push({ name: 'advisor-detail', params: { id: authStore.advisor?.id } })
+      } else {
+        router.push({ name: 'home-view' })
+      }
+      // router.push({ name: 'home-view'})
     })
     .catch((err) => {
       messageStore.updateMessage('could not login')
