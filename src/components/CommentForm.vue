@@ -34,12 +34,10 @@ import { ref } from 'vue'
 import CommentService from '@/services/CommentService'
 import { useAuthStore } from '@/stores/auth'
 import type { AdvisorItem, CommentItem } from '@/type'
-import { log } from 'console';
 const authStore = useAuthStore()
 
 const status = ref(false)
 const newCommentText = ref('')
-
 const submitComment = async () => {
   const comment: CommentItem = {
     id: 0,
