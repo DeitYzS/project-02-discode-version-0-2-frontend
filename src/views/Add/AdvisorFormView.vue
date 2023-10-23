@@ -44,7 +44,6 @@ function  saveAdvisor() {
  <main class="h-full w-full">
     <div class="VStack w-full text-center items-center justify-center align-middle">
       <form @submit.prevent="saveAdvisor">
-        <button type="submit" class="bg-blue-500 p-4 m-6 rounded-lg">Submit</button>
 
         <div class="VStack gap-12">
           <div class="VStack justify-center md:HStack">
@@ -80,13 +79,24 @@ function  saveAdvisor() {
             <ImageUpload v-model="advisor.images" />
           </div>
         </div>
+        <div class="VStack items-center text-center">
+          <button type="submit" class="hover:text-green-500 secondary-button button-border">Submit</button>
 
+        </div>
       </form>
 
       <!-- <pre>{{ student }}</pre> -->
     </div>
   </main>
 </template>
-<style>
+<style scoped>
+.button-border{
+  border: 1px rgba(255, 255, 255, 1) solid;
+  margin: 10px;
+  margin-top: 40px;
+}
+.button-border:hover{
+  border: 1px rgba(255, 255, 255, 0.3) solid;
 
+}
 </style>

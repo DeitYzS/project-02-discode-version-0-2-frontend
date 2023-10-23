@@ -45,13 +45,13 @@
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m6-6H6" /></svg
           ></RouterLink>
 
-          <button
+          <!-- <button
             type="submit"
             v-if="$route.name !== 'student-list' && $route.name !== 'advisor-list'"
             class="hover:text-green-500 m-10 secondary-button"
           >
             Done
-          </button>
+          </button> -->
         </div>
       </div>
       <router-view></router-view>
