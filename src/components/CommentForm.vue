@@ -1,79 +1,97 @@
 <template>
-  <form id="commentForm" class="window-base rounded-lg shadow-sm p-2 mt-4">
-    <div class="VStack relative">
-      <textarea class="window-secondary h-36 rounded-md" v-model="newCommentText"></textarea>
-      <div class="HStack absolute bottom-0 right-0">
-        <input class="secondary-button " type="button" value="Post" @click="submitComment" />
-      </div>
+  <div class="window-base mt-4">
+    <div v-if="status" class="VStack items-center align-middle justify-center h-full">
+      <p class="text-white text-3xl mt-4">Done!</p>
     </div>
-  </form>
+    <form
+      v-if="!status"
+      id="commentForm"
+      class="rounded-lg shadow-sm p-2 mt-4"
+      @submit.prevent="submitComment"
+    >
+      <div class="VStack relative gap-2 p-4">
+        <p class="text-xl font-medium">Text</p>
+        <textarea
+          class="window-secondary h-36 rounded-md text-primary"
+          v-model="newCommentText"
+          placeholder="Enter your comment here"
+        ></textarea>
+        <div class="HStack absolute bottom-5 right-5">
+          <input
+            class="secondary-button"
+            type="button"
+            value="Save Comment"
+            @click="submitComment"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-const emit= defineEmits(["add-comment"])
+import { ref } from 'vue'
+import CommentService from '@/services/CommentService'
+import { useAuthStore } from '@/stores/auth'
+import type { AdvisorItem, CommentItem } from '@/type'
+import { log } from 'console';
+const authStore = useAuthStore()
 
-const newCommentText = ref('');
+const status = ref(false)
+const newCommentText = ref('')
 
-const props = defineProps( {
-  newId: {
-    required:true,
-    type: Number
-  }
-})
-
-const submitComment = () => {
-  if (!newCommentText.value.trim()) {
-    alert('Please fill in the comment.');
-    return;
-  }
-
-  // Simulate adding the new comment to the student's comments array
-  const newComment = {
-    id: props.newId.valueOf() , // Generate a new ID
+const submitComment = async () => {
+  const comment: CommentItem = {
+    id: 0,
     text: newCommentText.value,
-    author: "1", // Assuming "1" is the author's ID
-  };
+    sentByAdvisor: false, // Or true, depending on your requirements
+    history: {
+      id: 0,
+      studentId: 0,
+      advisorId: 0,
+      commentHistory: []
+    }
+  }
 
-  // console.log(newComment.text);
-  emit('add-comment', newComment);
-  // student.comments.push(newComment);
+  try {
+    const response = await CommentService.saveComment(comment)
+    console.log(response)
+    console.log(comment);
+    
+    status.value = true
+    newCommentText.value = ''
 
-  // Clear the textarea after submitting
-  newCommentText.value = '';
-};
-
-
-
+    setTimeout(() => {
+      status.value = false
+    }, 3000) // Change status back to false after 3 seconds
+  } catch (error) {
+    console.error(error)
+  }
+}
 </script>
-
 
 <style scoped>
 #commentForm {
   text-decoration: none;
   /* max-width: 500px; */
 }
-
-.ocean-blue {
-  background-color: #1b9ff4;
-  color: white;
-  min-width: 87px;
+.text-primary,
+textarea::placeholder{
+  color: rgba(255, 255, 255, 1);
 }
-
-.ocean-blue:hover {
-  scale: 1.1;
-}
-
-.secondary-button{
+.secondary-button {
   border-radius: 10px;
   margin: 10px;
-   /* style */
+  /* style */
 
-background: var(--windows-glass, rgba(128, 128, 128, 0.7));
+  background: var(--windows-glass, rgba(0, 0, 0, 0.3));
 
-background-blend-mode: luminosity;
+  background-blend-mode: luminosity;
 
-/* Blur */
-backdrop-filter: blur(50px);
+  /* Blur */
+  backdrop-filter: blur(50px);
+}
+.window-base {
+  min-height: 300px;
 }
 </style>
