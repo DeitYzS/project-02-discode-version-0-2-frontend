@@ -1,5 +1,5 @@
 import axios from 'axios'
-import type { AxiosInstance, AxiosResponse } from 'axios'
+import type { AxiosResponse } from 'axios'
 import type { CommentItem } from '@/type'
 import apiClient from './AxiosClients'
 
