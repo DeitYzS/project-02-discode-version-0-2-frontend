@@ -12,12 +12,13 @@ const router = useRouter()
 
 
 const advisor =ref<AdvisorItem> ({
-  id: 0,
-  name: ' ',
-  surname: ' ',
-  email:' ',
-  images: [],
-  roles: [],
+id: 0,
+name: ' ',
+surname: ' ',
+email: ' ',
+images: [],
+roles: [],
+studentList: []
 })
 
 function  saveAdvisor() {
@@ -76,7 +77,7 @@ function  saveAdvisor() {
           
           <div class="VStack gap-4">
             <p>Profile upload</p>
-            <ImageUpload v-model="advisor.image" />
+            <ImageUpload v-model="advisor.images" />
           </div>
         </div>
 

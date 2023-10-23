@@ -176,9 +176,8 @@ defineProps({
         <div class="HStack md:w-1/2 md:justify-end">
           <div class="VStack md:justify-end">
             <img
-              v-for="image in students?.images[0]"
-              :key="image"
-              :src="image"
+              :key="student?.images[0]"
+              :src="student?.images[0]"
               alt="student image"
               class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40 hover:shadow-lg editable"
               :class="{ shaking: editMode }"
