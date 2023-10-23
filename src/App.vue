@@ -38,13 +38,13 @@ function handleScroll() {
 
 <template>
   <div class="bg-container text-white">
-    <header class="p-4 sticky top-0 z-10 " :class="{ 'bg-color': isScrolled }">
+    <header class="p-4 sticky top-0 z-10" :class="{ 'bg-color': isScrolled }">
       <div id="flashMessage" v-if="message">
         <h4>{{ message }}</h4>
       </div>
 
       <!-- Toolbar item -->
-      <nav class="container mx-auto px-4 " id="nav">
+      <nav class="container mx-auto px-4" id="nav">
         <div class="HStack justify-between" id="logo">
           <!-- left side -->
 
@@ -55,8 +55,11 @@ function handleScroll() {
           </div>
 
           <!-- rigth side -->
-          <div class="font-base space-x-4 flex flex-row ">
-            <div v-if="authStore.isAdmin || authStore.isAdvisor" class="VStack justify-center ml-8 space-x-2">
+          <div class="font-base space-x-4 flex flex-row">
+            <div
+              v-if="authStore.isAdmin || authStore.isAdvisor"
+              class="VStack justify-center ml-8 space-x-2"
+            >
               <router-link to="/userlist">Users list</router-link>
             </div>
             <!-- <div v-if="authStore.isAdvisor" class="VStack justify-center ml-8 space-x-2">
@@ -91,7 +94,7 @@ function handleScroll() {
                   v-if="authStore.currentUserNameStudent || authStore.curretUserNameAdvisor"
                   class="flex navbar-nav ml-auto secondary-button"
                 >
-                  <li class="nav-item px-2 ">
+                  <li class="nav-item px-2">
                     <router-link to="/profile" class="nav-link font-secondary">
                       <font-awesome-icon icon="user" />
                       <div v-if="authStore.isAdmin">
@@ -125,14 +128,16 @@ function handleScroll() {
 </template>
 
 <style scoped>
-.secondary-button{
+.secondary-button {
   margin: 0;
 }
 .bg-color {
-  background: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.1)); /* Adjust the opacity values as needed */
-  backdrop-filter: blur(10px); 
+  background: linear-gradient(
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0.1)
+  ); /* Adjust the opacity values as needed */
+  backdrop-filter: blur(10px);
 }
-
 
 .bg-container::before {
   content: '';
