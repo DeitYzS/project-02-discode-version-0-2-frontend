@@ -56,12 +56,12 @@ function handleScroll() {
 
           <!-- rigth side -->
           <div class="font-base space-x-4 flex flex-row ">
-            <div v-if="authStore.isAdmin" class="VStack justify-center ml-8 space-x-2">
+            <div v-if="authStore.isAdmin || authStore.isAdvisor" class="VStack justify-center ml-8 space-x-2">
               <router-link to="/userlist">Users list</router-link>
             </div>
-            <div v-if="authStore.isAdvisor" class="flex flex-row ml-8 space-x-2">
+            <!-- <div v-if="authStore.isAdvisor" class="VStack justify-center ml-8 space-x-2">
               <router-link to="/userlist">Users list</router-link>
-            </div>
+            </div> -->
 
             <nav>
               <nav class="flex justify-center">
