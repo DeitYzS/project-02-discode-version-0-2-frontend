@@ -16,15 +16,8 @@ export default {
   getStudentByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
     return apiClient.get<StudentItem[]>('/students?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
   },
-  // updateStudent(id: number): Promise<AxiosResponse<StudentItem>> {
-  //   return apiClient.put<StudentItem>('students/'+ id.toString())
-  // },
-  // updateStudent(id: number, updatedStudent: StudentItem): Promise<AxiosResponse<StudentItem>> {
-  //   return apiClient.put<StudentItem>('/students/' + id, updatedStudent);
-  // }
-
-  // Update the updateStudent method in StudentService to accept a partial student object
-updateStudent(id: number, updatedProperties: Partial<StudentItem>): Promise<AxiosResponse<StudentItem>> {
+ 
+updateStudent(id: number, updatedProperties: any): Promise<AxiosResponse<StudentItem>> {
   return apiClient.put<StudentItem>('/students/' + id, updatedProperties);
 }
 

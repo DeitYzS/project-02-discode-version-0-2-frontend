@@ -9,10 +9,9 @@ import TextField from '@/components/TextField.vue'
 import StudentService from '@/services/StudentService'
 import Picker from '@/components/PickerField.vue'
 import ImageUpload from '@/components/ImageUpload.vue'
-
+import AdvisorService from '@/services/AdvisorService'
 import type { AdvisorItem } from '@/type'
 const advisors = ref<AdvisorItem[]>([])
-import AdvisorService from '@/services/AdvisorService'
 const store = useStudentStore()
 const { student } = storeToRefs(store)
 const id = ref(student.value?.id)
@@ -33,6 +32,7 @@ const toggleEditMode = () => {
     updateStudent()
   }
 }
+
 
 const updateStudent = async () => {
   if (student.value && id.value !== undefined) {
