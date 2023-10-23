@@ -1,9 +1,9 @@
 <template>
     <form id="commentForm" class="window-base rounded-lg shadow-sm p-2 mt-4">
       <div class="VStack relative">
-        <textarea class="window-secondary h-36 rounded-md" v-model="newCommentText"></textarea>
+        <!-- <textarea class="window-secondary h-36 rounded-md" v-model="newCommentText"></textarea> -->
         <div class="HStack absolute bottom-0 right-0">
-          <input class="secondary-button " type="button" value="Announcement" @click="submitComment" />
+          <!-- <input class="secondary-button " type="button" value="Announcement" @click="submitComment" /> -->
         </div>
       </div>
     </form>
