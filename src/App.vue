@@ -54,7 +54,7 @@ function handleScroll() {
                 ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
               >
             </div>
-            <div v-else>
+            <div v-if="authStore.isStudent">
               <router-link :to="{ name: 'student-detail', params: { id: authStore.student?.id } }">
                 <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
               </router-link>
@@ -102,15 +102,24 @@ function handleScroll() {
                   class="flex navbar-nav ml-auto secondary-button"
                 >
                   <li class="nav-item px-2">
-                    <router-link to="/profile" class="nav-link font-secondary">
-                      <font-awesome-icon icon="user" />
-                      <div v-if="authStore.isAdmin">
-                        {{ 'ADMIN' }}
-                      </div>
-                      <div v-else>
+                    <div v-if="authStore.isAdvisor">
+                      <router-link :to="{ name: 'advisor-detail', params: { id: authStore.advisor?.id } }" class="nav-link font-secondary">
+                        <font-awesome-icon icon="user" />
+
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
-                      </div>
-                    </router-link>
+                      </router-link>
+                    </div>
+                    <div v-if="authStore.isStudent">
+                      <router-link :to="{ name: 'student-detail', params: { id: authStore.student?.id } }" class="nav-link font-secondary">
+                        <font-awesome-icon icon="user" />
+
+                        {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
+                      </router-link>
+                    </div>
+                    <div v-if="authStore.isAdmin">
+                       {{ "ADMIN" }}
+
+                    </div>
                   </li>
 
                   <li class="nav-item px-2">
