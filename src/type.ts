@@ -20,15 +20,23 @@ export interface AdvisorItem {
     studentList:string[]
 }
 
-export interface CommentItem {
-    id: number
-    text: string
-    author: string
-}
-
 export interface AnnItem {
     id: number
     title: string
     description: string
     advisor: AdvisorItem
+}
+
+export interface CommentItem {
+    id: number
+    text: string
+    sentByAdvisor: false
+    history: HistoryCommentItem
+}
+
+export interface HistoryCommentItem {
+    id: number
+    studentId: number
+    advisorId: number
+    commentHistory: CommentItem[]
 }

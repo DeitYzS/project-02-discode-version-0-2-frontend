@@ -259,7 +259,7 @@ defineProps({
         <div class="HStack flex items-center justify-center w-full">
           <div class="VStack w-1/2 flex items-center justify-center">
             <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-detail' }"
-              ><p class="text-xl">Detail</p>
+              ><p class="text-xl">Announcement</p>
             </RouterLink>
           </div>
           <div class="vertical-line"></div>

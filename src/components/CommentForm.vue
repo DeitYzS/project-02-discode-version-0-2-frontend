@@ -1,9 +1,9 @@
 <template>
-  <form id="commentForm" class="bg-white rounded-lg shadow-sm p-2 mt-4">
+  <form id="commentForm" class="window-base rounded-lg shadow-sm p-2 mt-4">
     <div class="VStack relative">
-      <textarea class="bg-gray-200 h-36 rounded-md" v-model="newCommentText"></textarea>
+      <textarea class="window-secondary h-36 rounded-md" v-model="newCommentText"></textarea>
       <div class="HStack absolute bottom-0 right-0">
-        <input class="button ocean-blue w-fit p-2 rounded-md m-2" type="button" value="Post" @click="submitComment" />
+        <input class="secondary-button " type="button" value="Post" @click="submitComment" />
       </div>
     </div>
   </form>
@@ -62,5 +62,18 @@ const submitComment = () => {
 
 .ocean-blue:hover {
   scale: 1.1;
+}
+
+.secondary-button{
+  border-radius: 10px;
+  margin: 10px;
+   /* style */
+
+background: var(--windows-glass, rgba(128, 128, 128, 0.7));
+
+background-blend-mode: luminosity;
+
+/* Blur */
+backdrop-filter: blur(50px);
 }
 </style>

@@ -163,6 +163,57 @@
     color: #545454;
   }
 
+  .window-base {
+    /* layout */
+    width: 100%;
+    height: auto;
+    
+    /* style */
+    border-radius: 23px;
+
+    background: var(--windows-glass, rgba(128, 128, 128, 0.3));
+
+    background-blend-mode: luminosity;
+
+    /* Blur */
+    backdrop-filter: blur(50px);
+  }
+
+  .window-safe {
+    
+    width: 100%;
+    height: auto;
+    padding: 16px;
+    min-height: 300px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* min-height: 720px; */
+    
+
+    /* style */
+    border-radius: 23px;
+
+    background: var(--windows-glass, rgba(128, 128, 128, 0.3));
+
+    background-blend-mode: luminosity;
+
+    /* Blur */
+    backdrop-filter: blur(50px);
+  }
+  .window-secondary {
+    background: var(
+      --Recessed,
+      linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.1) 100%),
+      rgba(208, 208, 208, 0.5)
+    );
+    background-blend-mode: luminosity, color-burn;
+    box-shadow:
+      1px 1.5px 4px 0px rgba(0, 0, 0, 0.1) inset,
+      1px 1.5px 4px 0px rgba(0, 0, 0, 0.08) inset,
+      0px -0.5px 1px 0px rgba(255, 255, 255, 0.25) inset,
+      0px -0.5px 1px 0px rgba(255, 255, 255, 0.3) inset;
+  }
+
   .toolbar {
     left: 20%; /* Center the toolbar */
     right: 20%;
