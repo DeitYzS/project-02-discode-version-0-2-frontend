@@ -59,11 +59,11 @@ function handleScroll() {
                 <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
               </router-link>
             </div>
-            <!-- <div v-if="!authStore.isStudent || !authStore.isAdvisor || !authStore.isAdmin">
+            <div v-if="!authStore.isStudent && !authStore.isAdvisor && !authStore.isAdmin">
               <router-link :to="{ name: 'home-view'}">
                 <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
               </router-link>
-            </div> -->
+            </div>
 
           </div>
 

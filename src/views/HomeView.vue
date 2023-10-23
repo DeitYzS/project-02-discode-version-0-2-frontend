@@ -6,9 +6,9 @@
           <p class="font-bold text-lg">CMU</p>
           <p class="text-2xl">College of Arts, Media and Technology, Chiang Mai University</p>
           <h1 class="text-left text-5xl font-medium black font-primary">
-            Get ready for New Auctions <br />
+            Get ready for New System <br />
             <span class="text-left text-lg font-light font-sans">
-              Now you can take your event and session <br />
+              Now you can manage your student here! <br />
               <!-- beyond the SE311 LAB. Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto provident asperiores fugit repellendus fugiat iure odit quae blanditiis error. Sed eum nihil odio omnis sunt perspiciatis dolorem, eligendi culpa consequatur. -->
             </span>
           </h1>

@@ -29,9 +29,9 @@
         <div class="w-1/3 flex items-center justify-center align-middle">
           <p class="text-xl font-medium mt-4 p-4">{{ routeText }}</p>
         </div>
-        <div class="w-1/3 flex items-center justify-end align-middle">
+        <div class="w-1/3 flex items-center justify-end align-middle" >
           <RouterLink
-            v-if="$route.name !== 'add-student' && $route.name !== 'add-advisor'"
+            v-if="$route.name !== 'add-student' && $route.name !== 'add-advisor' && authStore.isAdmin"
             class="hover:text-green-500 m-10 button-circle"
             :to="{ name: $route.name === 'student-list' ? 'add-student' : 'add-advisor' }"
             ><svg
@@ -49,7 +49,6 @@
             type="submit"
             v-if="$route.name !== 'student-list' && $route.name !== 'advisor-list'"
             class="hover:text-green-500 m-10 secondary-button"
-            :to="{ name: $route.name === 'student-list' ? 'add-student' : 'add-advisor' }"
           >
             Done
           </button>
@@ -59,15 +58,11 @@
       <div class="toolbar">
         <div class="HStack w-full h-full">
           <div class="w-1/2 flex items-center justify-center">
-            <RouterLink class="hover:text-red-400" :to="{ name: 'student-list' }"
-              >Student</RouterLink
-            >
+            <RouterLink class="hover:text-red-400" :to="{ name: 'student-list' }">Student</RouterLink>
           </div>
 
           <div class="w-1/2 flex items-center justify-center">
-            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-list' }"
-              >Advisor</RouterLink
-            >
+            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-list' }">Advisor</RouterLink>
           </div>
         </div>
       </div>
@@ -78,8 +73,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-
+import { useAuthStore } from '@/stores/auth'
 const route = useRoute()
+const authStore = useAuthStore()
 
 // Define a computed property to set the text based on the route name
 const routeText = computed(() => {
@@ -96,3 +92,28 @@ const routeText = computed(() => {
   }
 })
 </script>
+
+<style scoped>
+.profile {
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+}
+.safe-area {
+  margin-top: 10px;
+}
+.bubble {
+  background-color: white;
+  border-radius: 16px;
+  padding: 10px;
+  width: 100%;
+}
+
+.text-primary {
+  font-size: 18px;
+  font-weight: 500;
+}
+.text-secondary {
+  font-size: 15px;
+}
+</style>

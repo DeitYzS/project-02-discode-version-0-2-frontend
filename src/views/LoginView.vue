@@ -17,6 +17,7 @@
               <InputText type="text" v-model="username" :error="errors['username']"></InputText>
             </div>
 
+
             <div class="VStack">
               <div class="HStack justify-between items-center align-middle">
                 <label for="password"> Password </label>
@@ -28,6 +29,7 @@
               </div>
               <InputText type="password" v-model="password" :error="errors['password']"></InputText>
             </div>
+
 
             <div>
               <button
@@ -92,7 +94,6 @@ const onSubmit = handleSubmit((values) => {
       } else {
         router.push({ name: 'home-view' })
       }
-      // router.push({ name: 'home-view'})
     })
     .catch((err) => {
       messageStore.updateMessage('could not login')
