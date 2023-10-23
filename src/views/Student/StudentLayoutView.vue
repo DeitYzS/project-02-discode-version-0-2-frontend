@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { useStudentStore } from '@/stores/student'
 import { storeToRefs } from 'pinia'
+import { useAuthStore } from '@/stores/auth'
+
 import { useAdvisorStore } from '@/stores/advisor'
 import { ref } from 'vue'
 import type { StudentItem } from '@/type'
@@ -25,6 +27,8 @@ const editingName = ref(false)
 const editingLastname = ref(false)
 const editingPicture = ref(false)
 const editingSTD = ref(false)
+const authStore = useAuthStore()
+
 const toggleEditMode = () => {
   editMode.value = !editMode.value
   if (!editMode.value) {
@@ -38,24 +42,23 @@ const toggleEditMode = () => {
 }
 
 const validationSchema = yup.object({
-  studentId:yup.string().required('The student ID is required'),
+  studentId: yup.string().required('The student ID is required'),
   name: yup.string().required('The firstname is required'),
-  surname: yup.string().required('The lastname is required'),
+  surname: yup.string().required('The lastname is required')
 })
-
 
 const { errors, handleSubmit } = useForm({
   validationSchema,
   initialValues: {
     studentId: student.value?.studentId,
     name: student.value?.name,
-    surname: student.value?.surname,
+    surname: student.value?.surname
   }
 })
 
 const { value: studentId } = useField<string>('studentId')
-  const { value: name } = useField<string>('name')
-    const { value: surname } = useField<string>('surname')
+const { value: name } = useField<string>('name')
+const { value: surname } = useField<string>('surname')
 
 const updateStudent = async () => {
   if (student.value && id.value !== undefined) {
@@ -121,22 +124,24 @@ defineProps({
       <div class="h-auto w-full">
         <div class="HStack justify-between">
           <div class="VStack justify-center">
-            <RouterLink :to="{ name: 'student-list' }" class="hover:text-green-500 button-circle">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 19.5L8.25 12l7.5-7.5"
-                />
-              </svg>
-            </RouterLink>
+            <div v-if="authStore.isAdmin || authStore.isAdvisor">
+              <RouterLink :to="{ name: 'student-list' }" class="hover:text-green-500 button-circle">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15.75 19.5L8.25 12l7.5-7.5"
+                  />
+                </svg>
+              </RouterLink>
+            </div>
           </div>
           <div class="VStack justify-center">
             <button
@@ -161,7 +166,7 @@ defineProps({
               </p>
             </div>
             <div v-if="editMode && editingSTD">
-              <TextField v-model="student.studentId"  :error="errors['studentId']" />
+              <TextField v-model="student.studentId" :error="errors['studentId']" />
             </div>
             <div v-if="editMode && !editingSTD">
               <button class="hover:text-green-500 button-circle" @click="editingStudentID">
@@ -190,7 +195,7 @@ defineProps({
                   {{ student.name }}
                 </div>
                 <div v-if="editMode && editingName">
-                  <TextField v-model="student.name"  :error="errors['name']" />
+                  <TextField v-model="student.name" :error="errors['name']" />
                 </div>
                 <div v-if="editMode && !editingName">
                   <button class="hover:text-green-500 button-circle" @click="editingStudentName">
@@ -217,7 +222,7 @@ defineProps({
                   {{ student.surname }}
                 </div>
                 <div v-if="editMode && editingLastname">
-                  <TextField v-model="student.surname"  :error="errors['surname']"/>
+                  <TextField v-model="student.surname" :error="errors['surname']" />
                 </div>
                 <div v-if="editMode && !editingLastname">
                   <button
@@ -247,8 +252,8 @@ defineProps({
             <!-- <div class="HStack">
               <div v-if="!editingAdvisor">
                 <div v-if="student?.advisor.id"> -->
-                  Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
-                <!-- </div>
+            Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
+            <!-- </div>
                 <div v-else>Advisor: Not have</div>
               </div>
               <div v-if="editMode && editingAdvisor">
@@ -261,7 +266,7 @@ defineProps({
                   :textExtractor="(advisor) => `${advisor.name} ${advisor.surname}`"
                 />
               </div> -->
-              <!-- <div v-if="editMode && !editingAdvisor">
+            <!-- <div v-if="editMode && !editingAdvisor">
                 <button class="hover:text-green-500 button-circle" @click="editingStudentadvisor">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
