@@ -120,7 +120,7 @@ defineProps({
           <p class="text-2xl font-secondary">Advisor</p>
           <!-- <p class="font-bold text-lg">{{ id }}</p> -->
 
-          <h1 class="text-left text-5xl font-medium black font-primary">
+          <h1 class="text-left text-3xl font-medium black font-primary">
             <!-- {{ advisor.name }} {{ advisor.surname }} <br /> -->
 
             <div class="HStack gap-4">

@@ -93,7 +93,7 @@ function saveStudent() {
             </div>
           </div>
           <div class="VStack gap-4">
-            <h3 class="text-left">Student ID</h3>
+            <h3 class="text-center">Student ID</h3>
             <TextField
                 class="text-left mx-auto"
                 v-model="student.studentId"
@@ -101,11 +101,11 @@ function saveStudent() {
               />
           </div>
           <div class="VStack gap-4">
-            <h3>Who is your Advisor?</h3>
+            <h3>Who is your advisor?</h3>
             <div class="HStack justify-center md:justify-between ">
               <label class="hidden md:block">Advisor</label>
               <Picker
-                class="text-black"
+                class="text-black border rounded-3xl"
                 v-model="student.advisor.id"
                 :options="advisors"
                 :keyExtractor="(advisor) => advisor.id"

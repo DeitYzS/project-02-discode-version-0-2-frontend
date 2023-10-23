@@ -111,7 +111,7 @@ export const useAuthStore = defineStore('auth', {
     //   }
 
     registerStudent(
-        studentId: number,
+        studentId: string,
         email: string,
         password: string,
         username: string,
