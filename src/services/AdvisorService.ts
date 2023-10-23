@@ -22,10 +22,8 @@ export default {
   updateStudent(id: number): Promise<AxiosResponse<AdvisorItem>> {
     return apiClient.put<AdvisorItem>('advisors/'+ id.toString())
   },
-  // getAdvisee(advisorId: number, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
-  //   return apiClient.get<StudentItem[]>('/students?_limit=' + perPage + '&_page=' + page + '&advisorId=' + advisorId);
-  // },
-  // getAdviseeByKeyword(advisorId: number, keyword: string, perPage: number, page: number): Promise<AxiosResponse<StudentItem[]>> {
-  //   return apiClient.get<StudentItem[]>('/students?title=' + keyword + '&_limit=' + perPage + '&_page=' + page + '&advisorId=' + advisorId);
-  // }
+  updateAdvisor(id: number, updatedProperties: any): Promise<AxiosResponse<StudentItem>> {
+    return apiClient.put<StudentItem>('/advisors/' + id, updatedProperties);
+  }
+ 
 }
