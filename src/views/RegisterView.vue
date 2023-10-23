@@ -5,7 +5,7 @@ import { useAuthStore } from '@/stores/auth'
 import * as yup from 'yup'
 import { useField, useForm } from 'vee-validate'
 import InputText from '@/components/InputText.vue'
-
+import TextField from '@/components/TextField.vue'
 const router = useRouter()
 const authStore = useAuthStore()
 const messageStore = useMessageStore()
@@ -22,7 +22,7 @@ const validationSchema = yup.object({
 const { errors, handleSubmit } = useForm({
   validationSchema,
   initialValues: {
-    studentId: 0,
+    studentId: '',
     username: '',
     password: '',
     firstname: '',
@@ -36,53 +36,54 @@ const { value: password } = useField<string>('password')
 const { value: firstname } = useField<string>('firstname')
 const { value: lastname } = useField<string>('lastname')
 const { value: username } = useField<string>('username')
-const { value: studentId } = useField<number>('studentId')
+const { value: studentId } = useField<string>('studentId')
 
-const onSubmit = handleSubmit((values) => {
+const onSubmit = handleSubmit(async (values) => {
   console.log(values)
-  authStore
-    .registerStudent(values.studentId ,values.email, values.password, values.username, values.firstname, values.lastname)
-    .then(() => {
-      console.log('Register Success')
-      router.push({ name: 'student-list' })
-    })
-    .catch((err) => {
-      messageStore.updateMessage('Could not register, maybe the current username was already used')
-      console.log(err)
-      setTimeout(() => {
-        messageStore.resetMessage()
-      }, 3000)
-      // console.log('error', err)
-    })
+  try {
+    await authStore.registerStudent(values.studentId ,values.email, values.password, values.username, values.firstname, values.lastname)
+    console.log('Register Success')
+    router.push({ name: 'login'})
+  } catch (err) {
+    // messageStore.updateMessage('Could not register, maybe the current username was already used')
+    // console.log(err)
+    // setTimeout(() => {
+    //   messageStore.resetMessage()
+    // }, 3000)
+    router.push({ name: 'login'})
+
+  }
 })
+
 </script>
 
 <template>
- <div class="flex min-h-full flex-1 flex-col justify-items-center px-6 py-12 lg:px-8">
+  <main ></main>
+ <div class="flex min-h-full flex-1 flex-col justify-items-center px-6 py-12 lg:px-8 window-base">
     <form action="#" method="POST" @submit.prevent="onSubmit">
       <div class="my-5">
         <h5>StudentID</h5>
-        <InputText type="long" v-model="studentId" :error="errors['studentId']"></InputText>
+        <TextField type="text" v-model="studentId" :error="errors['studentId']"></TextField>
       </div>
       <div class="my-5">
         <h5>Username</h5>
-        <InputText type="text" v-model="username" :error="errors['username']"></InputText>
+        <TextField type="text" v-model="username" :error="errors['username']"></TextField>
       </div>
       <div class="my-5">
         <h5>Firstname</h5>
-        <InputText type="text" v-model="firstname" :error="errors['firstname']"></InputText>
+        <TextField type="text" v-model="firstname" :error="errors['firstname']"></TextField>
       </div>
       <div class="my-5">
         <h5>Lastname</h5>
-        <InputText type="text" v-model="lastname" :error="errors['lastname']"></InputText>
+        <TextField type="text" v-model="lastname" :error="errors['lastname']"></TextField>
       </div>
       <div class="my-5">
         <h5>Email</h5>
-        <InputText type="text" v-model="email" :error="errors['email']"></InputText>
+        <TextField type="text" v-model="email" :error="errors['email']"></TextField>
       </div>
       <div class="my-5">
         <h5>Password</h5>
-        <InputText type="password" v-model="password" :error="errors['password']"></InputText>
+        <TextField type="password" v-model="password" :error="errors['password']"></TextField>
       </div>
 
       <button
