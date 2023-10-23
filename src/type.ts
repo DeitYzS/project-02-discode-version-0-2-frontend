@@ -24,4 +24,11 @@ export interface CommentItem {
     id: number
     text: string
     author: string
-  }
+}
+
+export interface AnnItem {
+    id: number
+    title: string
+    description: string
+    advisor: AdvisorItem
+}
