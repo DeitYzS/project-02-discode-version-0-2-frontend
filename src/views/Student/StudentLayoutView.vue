@@ -11,6 +11,8 @@ import Picker from '@/components/PickerField.vue'
 import ImageUpload from '@/components/ImageUpload.vue'
 import AdvisorService from '@/services/AdvisorService'
 import type { AdvisorItem } from '@/type'
+import router from '@/router'
+import type { AxiosResponse } from 'axios'
 const advisors = ref<AdvisorItem[]>([])
 const store = useStudentStore()
 const { student } = storeToRefs(store)

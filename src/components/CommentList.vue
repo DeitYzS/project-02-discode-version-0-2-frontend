@@ -9,7 +9,7 @@
         <div class="HStack p-4">
           <img
             v-if="comment.author"
-            :src="props.advisor.image"
+            :src="props.advisor.images[-1]"
             alt="Author Image"
             class="rounded-full w-16 h-16 object-cover"
           />
