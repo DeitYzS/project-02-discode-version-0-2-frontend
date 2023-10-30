@@ -51,17 +51,17 @@ function handleScroll() {
           <div class="logo VStack justify-center">
             <div v-if="authStore.isAdmin || authStore.isAdvisor">
               <router-link to="/"
-                ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
+                ><p class="font-semibold text-2xl font-secondary">Discode</p></router-link
               >
             </div>
             <div v-if="authStore.isStudent">
               <router-link :to="{ name: 'student-detail', params: { id: authStore.student?.id } }">
-                <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
+                <p class="font-semibold text-2xl font-secondary">Discode</p>
               </router-link>
             </div>
             <div v-if="!authStore.isStudent && !authStore.isAdvisor && !authStore.isAdmin">
               <router-link :to="{ name: 'home-view'}">
-                <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
+                <p class="font-semibold text-2xl font-secondary">Discode</p>
               </router-link>
             </div>
 
