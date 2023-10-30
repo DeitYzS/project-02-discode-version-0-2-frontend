@@ -13,23 +13,25 @@ defineProps({ students: { type: Object as PropType<StudentItem>, required: true 
   <main class="h-full w-full">
     <div class="w-full h-full VStack">
       <div class="HStack w-full gap-8">
-
-
-        <div class="w-1/5 VStack window-safe ">
-          <div class="VStack secondary-button window-secondary">Advisor</div>
-          <div class="VStack h-1/2 p-4 text-center items-center">
-            <img
-              :key="student?.advisor.images[0]"
-              :src="student?.advisor.images[0]"
-              alt="student image"
-              class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40 hover:shadow-lg editable"
-            />
-            <p class="font-secondary">
-              {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
-            </p>
-          </div>
+        <div class="w-1/5 VStack window-safe">
+          <router-link
+            :to="{ name: 'advisor-detail', params: { id: student?.advisor.id } }"
+            class="nav-link font-secondary"
+          >
+            <div class="VStack secondary-button window-secondary">Advisor</div>
+            <div class="VStack h-1/2 p-4 text-center items-center">
+              <img
+                :key="student?.advisor.images[0]"
+                :src="student?.advisor.images[0]"
+                alt="student image"
+                class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40 hover:shadow-lg editable"
+              />
+              <p class="font-secondary">
+                {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
+              </p>
+            </div>
+          </router-link>
         </div>
-
 
         <div class="w-4/5 VStack h-full window-safe">
           <div class="VStack secondary-button window-secondary">Anouncement</div>

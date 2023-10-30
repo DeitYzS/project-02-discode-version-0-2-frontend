@@ -169,7 +169,7 @@ function handleScroll() {
   width: 100%;
   height: 100%;
   z-index: -1;
-  background-image: url('/src/assets/atmostphere.jpg');
+  background-image: url('/src/assets/ParisRoom - Night.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }

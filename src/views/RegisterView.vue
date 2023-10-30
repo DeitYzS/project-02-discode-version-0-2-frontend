@@ -58,12 +58,12 @@ const onSubmit = handleSubmit(async (values) => {
 </script>
 
 <template>
-  <main ></main>
- <div class="flex min-h-full flex-1 flex-col justify-items-center px-6 py-12 lg:px-8 window-base">
+  <main class="container mx-auto px-4">
+    <div class="flex min-h-full flex-1 flex-col justify-items-center px-6 py-12 lg:px-8 window-base">
     <form action="#" method="POST" @submit.prevent="onSubmit">
       <div class="my-5">
         <h5>StudentID</h5>
-        <TextField type="text" v-model="studentId" :error="errors['studentId']"></TextField>
+        <TextField class="w-94" type="text" v-model="studentId" :error="errors['studentId']"></TextField>
       </div>
       <div class="my-5">
         <h5>Username</h5>
@@ -94,5 +94,12 @@ const onSubmit = handleSubmit(async (values) => {
       </button>
     </form>
   </div>
+  </main>
+ 
 
 </template>
+
+<style scoped>
+TextField{
+
+}</style>
