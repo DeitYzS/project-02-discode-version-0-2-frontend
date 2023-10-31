@@ -18,8 +18,7 @@ if (token && student) {
   authStore.reloadStudent(token, JSON.parse(student))
 } else {
   authStore.logout()
-}
-if (token && advisor) {
+} if (token && advisor) {
   authStore.reloadAdvisor(token, JSON.parse(advisor))
 } else {
   authStore.logout()
@@ -54,19 +53,20 @@ function handleScroll() {
           <div class="logo VStack justify-center">
             <div v-if="authStore.isAdmin || authStore.isAdvisor">
               <router-link to="/"
-                ><p class="font-semibold text-2xl font-secondary">Ultimate Alein</p></router-link
+                ><p class="font-semibold text-2xl font-secondary">Discode</p></router-link
               >
             </div>
             <div v-if="authStore.isStudent">
               <router-link :to="{ name: 'student-detail', params: { id: authStore.student?.id } }">
-                <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
+                <p class="font-semibold text-2xl font-secondary">Discode</p>
               </router-link>
             </div>
             <div v-if="!authStore.isStudent && !authStore.isAdvisor && !authStore.isAdmin">
-              <router-link :to="{ name: 'home-view' }">
-                <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
+              <router-link :to="{ name: 'home-view'}">
+                <p class="font-semibold text-2xl font-secondary">Discode</p>
               </router-link>
             </div>
+
           </div>
 
           <!-- rigth side -->
@@ -111,27 +111,22 @@ function handleScroll() {
                 >
                   <li class="nav-item px-2">
                     <div v-if="authStore.isAdvisor">
-                      <router-link
-                        :to="{ name: 'advisor-detail', params: { id: authStore.advisor?.id } }"
-                        class="nav-link font-secondary"
-                      >
+                      <router-link :to="{ name: 'advisor-detail', params: { id: authStore.advisor?.id } }" class="nav-link font-secondary">
                         <font-awesome-icon icon="user" />
 
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
                       </router-link>
                     </div>
                     <div v-if="authStore.isStudent">
-                      <router-link
-                        :to="{ name: 'student-detail', params: { id: authStore.student?.id } }"
-                        class="nav-link font-secondary"
-                      >
+                      <router-link :to="{ name: 'student-detail', params: { id: authStore.student?.id } }" class="nav-link font-secondary">
                         <font-awesome-icon icon="user" />
 
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
                       </router-link>
                     </div>
                     <div v-if="authStore.isAdmin">
-                      {{ 'ADMIN' }}
+                       {{ "ADMIN" }}
+
                     </div>
                   </li>
 

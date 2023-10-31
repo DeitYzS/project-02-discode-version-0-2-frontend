@@ -58,12 +58,13 @@ import InputText from '@/components/InputText.vue'
 import { ref } from 'vue'
 import { useField, useForm } from 'vee-validate'
 import * as yup from 'yup'
-import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import { useMessageStore } from '@/stores/message'
 
 const messageStore = useMessageStore()
 const router = useRouter()
+import { useAuthStore } from '@/stores/auth'
+
 const authStore = useAuthStore()
 
 const validationSchema = yup.object({

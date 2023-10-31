@@ -21,10 +21,11 @@ export interface AdvisorItem {
 }
 
 export interface AnnItem {
-    id: number
-    title: string
-    description: string
-    advisor: AdvisorItem
+    id: number;
+    title: string;
+    description: string;
+    files: string[]; // Adjust the type if necessary
+    advisor: AdvisorItem;
 }
 
 export interface CommentItem {

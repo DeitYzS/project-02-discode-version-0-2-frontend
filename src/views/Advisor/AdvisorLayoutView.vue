@@ -8,7 +8,9 @@ import TextField from '@/components/TextField.vue'
 import AdvisorService from '@/services/AdvisorService'
 const store = useAdvisorStore()
 const { advisor } = storeToRefs(store)
+import { useAuthStore } from '@/stores/auth'
 
+const authStore = useAuthStore()
 const editMode = ref(false)
 const editingName = ref(false)
 const editingLastname = ref(false)
@@ -17,37 +19,36 @@ const editingEmail = ref(false)
 const id = ref(advisor.value?.id)
 
 const toggleEditMode = async () => {
-  editMode.value = !editMode.value;
+  editMode.value = !editMode.value
   if (!editMode.value) {
-    editingName.value = false;
-    editingLastname.value = false;
-    editingEmail.value = false;
-    editingPicture.value = false;
+    editingName.value = false
+    editingLastname.value = false
+    editingEmail.value = false
+    editingPicture.value = false
 
     const updatedProperties = {
       name: advisor.value?.name || '',
       surname: advisor.value?.surname || '',
-      email: advisor.value?.email || '',
-    };
+      email: advisor.value?.email || ''
+    }
 
     if (id.value) {
-      updateAdvisor(id.value, updatedProperties);
+      updateAdvisor(id.value, updatedProperties)
     }
   }
 }
 
-const updateAdvisor = async (id: number, updatedProperties: { name: string; surname: string; email: string }) => {
+const updateAdvisor = async (
+  id: number,
+  updatedProperties: { name: string; surname: string; email: string }
+) => {
   try {
-    const response = await AdvisorService.updateAdvisor(id, updatedProperties);
-    console.log('Advisor updated successfully', response.data);
+    const response = await AdvisorService.updateAdvisor(id, updatedProperties)
+    console.log('Advisor updated successfully', response.data)
   } catch (error) {
-    console.error('Failed to update advisor', error);
+    console.error('Failed to update advisor', error)
   }
 }
-
-
-
-
 
 // const advisorStore = useAdvisorStore()
 // const advisor = storeToRefs(advisorStore).advisor
@@ -84,7 +85,7 @@ defineProps({
     <div class="VStack h-screen">
       <div class="h-auto w-full">
         <div class="HStack justify-between">
-          <div class="VStack justify-center">
+          <div class="VStack justify-center" v-if="authStore.isAdmin || authStore.isAdvisor">
             <RouterLink :to="{ name: 'advisor-list' }" class="hover:text-green-500 button-circle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +103,7 @@ defineProps({
               </svg>
             </RouterLink>
           </div>
-          <div class="VStack justify-center">
+          <div class="VStack justify-center" v-if="authStore.isAdmin || authStore.isAdvisor">
             <button
               type="submit"
               class="hover:text-green-500 m-10 secondary-button"
@@ -255,24 +256,29 @@ defineProps({
 
       <div class="herizontal-line"></div>
 
-      <section class="window-ignore p-4">
-        <div class="HStack flex items-center justify-center w-full">
-          <div class="VStack w-1/2 flex items-center justify-center">
-            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-detail' }"
-              ><p class="text-xl">Announcement</p>
-            </RouterLink>
+      <div class="" v-if="authStore.isAdmin || authStore.isAdvisor">
+        <section class="window-ignore p-4">
+          <div class="HStack flex items-center justify-center w-full">
+            <div class="VStack w-1/2 flex items-center justify-center">
+              <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-detail' }"
+                ><p class="text-xl">Announcement</p>
+              </RouterLink>
+            </div>
+            <div class="vertical-line"></div>
+            <div class="VStack w-1/2 flex items-center justify-center">
+              <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-advisee' }">
+                <p class="text-xl">Advisee</p>
+              </RouterLink>
+            </div>
           </div>
-          <div class="vertical-line"></div>
-          <div class="VStack w-1/2 flex items-center justify-center">
-            <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-advisee' }">
-              <p class="text-xl">Advisee</p>
-            </RouterLink>
-          </div>
-        </div>
 
-        <!-- Display child components within the layout -->
-        <router-view></router-view>
-      </section>
+          <!-- Display child components within the layout -->
+          <router-view></router-view>
+        </section>
+      </div>
+      <div v-else>
+        <a :href="'mailto:' + advisor?.email" class="secondary-button gap-2">Contact <span class="font-bold">{{advisor?.name}} {{advisor?.surname}}</span> via Email</a>
+      </div>
     </div>
   </main>
 </template>
