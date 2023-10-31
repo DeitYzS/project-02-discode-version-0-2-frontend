@@ -72,7 +72,7 @@ function handleScroll() {
           <!-- rigth side -->
           <div class="font-base space-x-4 flex flex-row">
             <div
-              v-if="authStore.isAdmin || authStore.isAdvisor"
+              v-if="authStore.isAdmin "
               class="VStack justify-center ml-8 space-x-2"
             >
               <router-link to="/userlist">Users list</router-link>

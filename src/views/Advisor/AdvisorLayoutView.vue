@@ -86,13 +86,14 @@ defineProps({
       <div class="h-auto w-full">
         <div class="HStack justify-between">
           <div class="VStack justify-center" v-if="authStore.isAdmin || authStore.isAdvisor">
-            <RouterLink :to="{ name: 'advisor-list' }" class="hover:text-green-500 button-circle">
+            <RouterLink :to="{ name: 'advisor-list' }" v-if="authStore.isAdmin"  class="hover:text-green-500 button-circle">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke-width="1.5"
                 stroke="currentColor"
+                
                 class="w-6 h-6"
               >
                 <path
@@ -284,7 +285,7 @@ defineProps({
                       d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
                     />
                   </svg>
-                  <p>{{ advisor.studentList.length }}</p>
+                  <p>{{ advisor?.studentList.length }}</p>
                 </div>
               </RouterLink>
             </div>

@@ -19,7 +19,8 @@ export default {
   getAnnouncementByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<AnnItem[]>> {
     return apiClient.get<AnnItem[]>('/anns?title=' + keyword + '&_limit=' + perPage + '&_page=' + page)
   },
-  updateAnnouncement(id: number): Promise<AxiosResponse<AnnItem>> {
-    return apiClient.put<AnnItem>('anns/'+ id.toString())
-  },
+  updateAnnouncement(id: number, updatedAnnouncement: AnnItem): Promise<AxiosResponse<AnnItem>> {
+    return apiClient.put<AnnItem>('/anns/' + id.toString(), updatedAnnouncement);
+  }
+  
 }

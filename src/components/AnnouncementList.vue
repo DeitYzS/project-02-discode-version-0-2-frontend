@@ -18,7 +18,7 @@ AnnouncementService.getAnnouncementBy()
 
     // Filter the announcements to include only those by the student's advisor
     announcements.value = res.data.filter(
-      (announcement) => announcement.advisor.id === student?.advisor.id
+      (announcement) => announcement.advisor.id == student?.advisor.id
     )
     console.log('Filtered announcements:', announcements.value) // Log filtered announcements
   })

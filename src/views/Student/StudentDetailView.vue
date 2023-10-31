@@ -36,7 +36,7 @@ defineProps({ students: { type: Object as PropType<StudentItem>, required: true 
         <div class="w-4/5 VStack h-full window-safe">
           <div class="VStack secondary-button window-secondary">Anouncement</div>
           <div class="HStack w-full h-full justify-start items-top">
-            <AnnouncementList class="w-full" />
+            <AnnouncementList class="w-full h-auto" />
           </div>
         </div>
       </div>
