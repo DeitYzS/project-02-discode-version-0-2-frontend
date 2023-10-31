@@ -44,10 +44,10 @@
           />
           <!-- File Button -->
           <button
-  type="button"
-  class="secondary-button group relative duration-1000 ease-in-out"
-  @click="$refs.fileInputRef.click()"
->
+            type="button"
+            class="secondary-button group relative duration-1000 ease-in-out"
+            @click="triggerFileInput"
+          >
             <div>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@
           <div v-for="(file, index) in attachedFiles" :key="index" class="secondary-button ml-4">
             <div class="HStack">
               {{ file.name }}
-              <button @click="removeAttachedFile(index)" class="ml-2 ">
+              <button @click="removeAttachedFile(index)" class="ml-2">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -102,6 +102,12 @@ const newAnnouncementTitle = ref('')
 const newAnnouncementText = ref('')
 let fileName = ref('') // Initialize as an empty string
 const attachedFiles = ref<File[]>([]) // Store attached files
+// Specify the type of $refs.fileInputRef
+const fileInputRef = ref<HTMLInputElement | null>(null)
+
+const triggerFileInput = () => {
+  document.getElementById('fileInput')?.click()
+}
 
 const handleFileUpload = (event: Event) => {
   const selectedFiles = (event.target as HTMLInputElement).files
@@ -121,8 +127,6 @@ const handleFileUpload = (event: Event) => {
   }
 }
 
-
-
 const removeAttachedFile = (index: number) => {
   attachedFiles.value.splice(index, 1)
 
@@ -131,21 +135,15 @@ const removeAttachedFile = (index: number) => {
 }
 
 
-
-
-
-
-
 const submitAnnouncement = async () => {
   const announcement = {
-  id: 0,
-  title: newAnnouncementTitle.value,
-  description: newAnnouncementText.value,
-  files: attachedFiles.value.map(file => file.name), // Only send the file names
-  advisor: authStore.advisor as AdvisorItem,
-}
+    id: 0,
+    title: newAnnouncementTitle.value,
+    description: newAnnouncementText.value,
+    files: attachedFiles.value.map((file) => file.name), // Only send the file names
+    advisor: authStore.advisor as AdvisorItem
+  }
   try {
-
     const response = await announcementService.saveAnnouncement(announcement)
     console.log(response)
     status.value = true
@@ -160,7 +158,6 @@ const submitAnnouncement = async () => {
     console.error(error)
   }
 }
-
 </script>
 
 <style scoped>

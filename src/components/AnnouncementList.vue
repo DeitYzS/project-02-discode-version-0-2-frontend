@@ -12,7 +12,7 @@ const student = studentStore.student // assuming this is how you get the current
 
 const announcements: Ref<Array<AnnItem>> = ref([])
 
-  AnnouncementService.getCommentBy()
+  AnnouncementService.getAnnouncementBy()
   .then((res: AxiosResponse<AnnItem[]>) => {
     console.log('All announcements:', res.data) // Log all announcements
 
@@ -32,6 +32,9 @@ const announcements: Ref<Array<AnnItem>> = ref([])
       <div class="safe-area bubble text-black w-full">
         <p class="text-primary">{{ announcement.title }}</p>
         <p class="text-secondary">{{ announcement.description }}</p>
+        <div class="" v-if="announcement.files">
+          <a href="">{{announcement.files}}</a>
+        </div>
       </div>
     </div>
   </div>
