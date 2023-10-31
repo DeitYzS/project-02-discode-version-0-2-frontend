@@ -272,6 +272,7 @@ defineProps({
 
         <!-- Display child components within the layout -->
         <router-view></router-view>
+        
       </section>
     </div>
   </main>

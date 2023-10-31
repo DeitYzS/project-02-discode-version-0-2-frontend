@@ -60,13 +60,15 @@ const { value: studentId } = useField<string>('studentId')
 const { value: name } = useField<string>('name')
 const { value: surname } = useField<string>('surname')
 
+// In your script section, modify the function to update the advisor ID in the student object:
 const updateStudent = async () => {
   if (student.value && id.value !== undefined) {
+    // Update the advisor ID in the student object
     const updatedProperties = {
       name: student.value.name,
       surname: student.value.surname,
       studentId: student.value.studentId,
-      advisor: student.value.advisor
+      advisor: student.value.advisor.id
     }
     console.log('Updating student with', updatedProperties)
 
@@ -79,6 +81,7 @@ const updateStudent = async () => {
       })
   }
 }
+
 AdvisorService.getAdvisorBy()
   .then((response: AxiosResponse<AdvisorItem[]>) => {
     advisors.value = response.data
@@ -96,10 +99,10 @@ const editingStudentpicture = () => {
   editMode.value = true
 }
 
-// const editingStudentadvisor = () => {
-//   editingAdvisor.value = true
-//   editMode.value = true
-// }
+const editingStudentAdvisor = () => {
+  editingAdvisor.value = true
+  editMode.value = true
+}
 
 const editingStudentLastname = () => {
   editingLastname.value = true
@@ -155,7 +158,7 @@ defineProps({
           </div>
         </div>
       </div>
-      <div class="VStack md:HStack md:safe-area">
+      <div class="VStack md:HStack md:safe-area primary">
         <div v-if="student" class="VStack safe-area md:w-1/2">
           <p class="text-2xl font-secondary">Student</p>
 
@@ -248,11 +251,42 @@ defineProps({
               </div>
             </div>
           </h1>
-          <span class="text-left text-lg font-light font-sans">
 
-            Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
-         
-          </span>
+          <div class="HStack">
+            <div v-if="!editingAdvisor" class="editable" :class="{ shaking: editMode }">
+              <span class="text-left text-lg font-light font-sans">
+                Advisor: {{ student?.advisor.name }} {{ student?.advisor.surname }}<br />
+              </span>
+            </div>
+            <div v-if="editMode && editingAdvisor">
+              <Picker
+                class="text-white border rounded-3xl"
+                v-model="student.advisor.id"
+                :options="advisors"
+                :keyExtractor="(advisor) => advisor.id"
+                :valueExtractor="(advisor) => advisor.id"
+                :textExtractor="(advisor) => `${advisor.name} ${advisor.surname}`"
+              />
+            </div>
+            <div v-if="editMode && !editingAdvisor">
+              <button class="hover:text-green-500 button-circle" @click="editingStudentAdvisor">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  class="w-6 h-6"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="HStack md:w-1/2 md:justify-end">
           <div class="VStack md:justify-end">
@@ -277,7 +311,8 @@ defineProps({
               </div>
               <div v-if="editMode && editingPicture">
                 <!-- <ImageUpload v-model="student?.images" /> -->
-                Not available in you region
+                <ImageUpload />
+                <!-- Not available in you region -->
               </div>
 
               <div v-if="!editingPicture">
@@ -311,7 +346,15 @@ defineProps({
       </div>
       <div>
         <!-- Display child components within the layout -->
+
         <router-view></router-view>
+        <div class="clouds absolute top-0 left-0 overflow-hidden">
+          <img src="/src/assets/cloud1.png" style="--i: 1" alt="" />
+          <img src="/src/assets/cloud2.png" style="--i: 2" alt="" />
+          <img src="/src/assets/cloud3.png" style="--i: 3" alt="" />
+          <img src="/src/assets/cloud4.png" style="--i: 4" alt="" />
+          <img src="/src/assets/cloud5.png" style="--i: 5" alt="" />
+        </div>
       </div>
     </div>
   </main>
@@ -328,6 +371,9 @@ defineProps({
 }
 button {
   margin: 0;
+}
+.primary {
+  z-index: 99;
 }
 
 .editable.shaking {
@@ -363,6 +409,22 @@ button {
   }
   50% {
     -moz-transform: rotate(0.5deg);
+  }
+}
+.clouds img {
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  max-width: 100%;
+  animation: animate calc(8s * var(--i)) linear infinite;
+  opacity: 20%;
+}
+@keyframes animate {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 </style>
