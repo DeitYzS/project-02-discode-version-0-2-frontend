@@ -14,6 +14,7 @@ import { useMessageStore } from '@/stores/message'
 import { useAuthStore } from '@/stores/auth'
 import AdvisorService from '@/services/AdvisorService'
 const authStore = useAuthStore()
+const status = ref(false)
 
 const store = useMessageStore()
 const router = useRouter()
@@ -62,12 +63,17 @@ function saveAnn() {
   }
 
   if (authStore.advisor !== null) {
-    
     ann.value.advisor.id = authStore.advisor.id
-   
-    AnnService.saveAnnouncement(ann.value).then((res) => {
 
+    AnnService.saveAnnouncement(ann.value).then((res) => {
+      status.value = true
+      ann.value.title = ''
+      ann.value.description = ''
+      ann.value.files = []
       console.log(res.data)
+      setTimeout(() => {
+        status.value = false
+      }, 2700)
     })
   }
 }
@@ -85,22 +91,13 @@ function filesChange() {
 </script>
 
 <template>
- 
-
-
-
-
-
-
-
-
-
-
+  <div v-if="status" class="VStack items-center align-middle justify-center w-full h-full">
+    <p class="text-white text-3xl mt-4">Done!</p>
+  </div>
   <div
+    v-if="!status"
     class="mb-[2rem] ml-0 mt-[108px] flex h-full w-full flex-col bg-se-dark text-xs md:text-base lg:ml-[17%] lg:mt-[60px] lg:w-[80%]"
   >
-
-
     <div>
       <form @submit.prevent="saveAnn">
         <div class="mx-auto w-[80%] lg:mx-auto">
