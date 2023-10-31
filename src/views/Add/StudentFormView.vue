@@ -22,7 +22,7 @@ const student = ref<StudentItem>({
   name: ' ',
   surname: ' ',
   images: [],
-  advisor: {
+ advisor: {
     id: 0,
     name: ' ',
     surname: ' ',
@@ -30,7 +30,7 @@ const student = ref<StudentItem>({
     images:[],
     roles: [],
     studentList:[],
-  },
+  } ,
   comments: [],
   course_list: [],
   roles: []

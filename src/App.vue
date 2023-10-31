@@ -9,14 +9,16 @@ const authStore = useAuthStore()
 const router = useRouter()
 const store = useMessageStore()
 const { message } = storeToRefs(store)
-const token = localStorage.getItem('token')
+const token = localStorage.getItem('access_token')
 const student = localStorage.getItem('student')
 const advisor = localStorage.getItem('advisor')
 const isScrolled = ref(false)
 
 if (token && student) {
   authStore.reloadStudent(token, JSON.parse(student))
-} else if (token && advisor) {
+} else {
+  authStore.logout()
+} if (token && advisor) {
   authStore.reloadAdvisor(token, JSON.parse(advisor))
 } else {
   authStore.logout()

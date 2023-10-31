@@ -12,18 +12,19 @@ const student = studentStore.student // assuming this is how you get the current
 
 const announcements: Ref<Array<AnnItem>> = ref([])
 
-  AnnouncementService.getAnnouncementBy()
+AnnouncementService.getAnnouncementBy()
   .then((res: AxiosResponse<AnnItem[]>) => {
     console.log('All announcements:', res.data) // Log all announcements
 
     // Filter the announcements to include only those by the student's advisor
-    announcements.value = res.data.filter(announcement => announcement.advisor.id === student?.advisor.id)
+    announcements.value = res.data.filter(
+      (announcement) => announcement.advisor.id === student?.advisor.id
+    )
     console.log('Filtered announcements:', announcements.value) // Log filtered announcements
   })
   .catch(() => {
     router.push({ name: 'network-error' })
   })
-
 </script>
 
 <template>
@@ -32,9 +33,14 @@ const announcements: Ref<Array<AnnItem>> = ref([])
       <div class="safe-area bubble text-black w-full">
         <p class="text-primary">{{ announcement.title }}</p>
         <p class="text-secondary">{{ announcement.description }}</p>
-        <div class="" v-if="announcement.files">
-          <a href="">{{announcement.files}}</a>
+        <!-- <div class="" v-if="announcement.files"> -->
+        <div v-if="announcement.files">
+          <a href="{{ announcement.files }}"></a>
         </div>
+        <div v-else>
+          No file
+        </div>
+        <!-- </div> -->
       </div>
     </div>
   </div>
