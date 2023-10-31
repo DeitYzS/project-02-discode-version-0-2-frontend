@@ -267,7 +267,25 @@ defineProps({
             <div class="vertical-line"></div>
             <div class="VStack w-1/2 flex items-center justify-center">
               <RouterLink class="hover:text-red-400" :to="{ name: 'advisor-advisee' }">
-                <p class="text-xl">Advisee</p>
+                <div class="HStack gap-2">
+                  <p class="text-xl pr-4">Advisee</p>
+
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="w-6 h-6"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"
+                    />
+                  </svg>
+                  <p>{{ advisor.studentList.length }}</p>
+                </div>
               </RouterLink>
             </div>
           </div>
@@ -277,7 +295,10 @@ defineProps({
         </section>
       </div>
       <div v-else>
-        <a :href="'mailto:' + advisor?.email" class="secondary-button gap-2">Contact <span class="font-bold">{{advisor?.name}} {{advisor?.surname}}</span> via Email</a>
+        <a :href="'mailto:' + advisor?.email" class="secondary-button gap-2"
+          >Contact <span class="font-bold">{{ advisor?.name }} {{ advisor?.surname }}</span> via
+          Email</a
+        >
       </div>
     </div>
   </main>
