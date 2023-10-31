@@ -74,7 +74,7 @@ const adviseeStudents = computed(() => {
 </script>
 <template>
   <!-- Stage -->
-  <main class="w-full h-full ">
+  <main class="w-full h-full mt-8">
     <div class="h-1/6 VStack w-full justify-center items-center align-middle">
       <div class="w-full justify-center HStack items-center align-middle">
         <TextField

@@ -1,80 +1,63 @@
 <template>
   <div class="window-base mt-4">
-    <div v-if="status" class="VStack items-center align-middle justify-center h-full">
-      <p class="text-white text-3xl mt-4">Done!</p>
-    </div>
     <form
-      v-if="!status"
-      id="commentForm"
+      id="announcementForm"
       class="rounded-lg shadow-sm p-2 mt-4"
-      @submit.prevent="submitComment"
+      @submit.prevent="submitAnnouncement"
     >
       <div class="VStack relative gap-2 p-4">
-        <p class="text-xl font-medium">Text</p>
+        <p class="text-xl font-medium">Comment</p>
+
         <textarea
           class="window-secondary h-36 rounded-md text-primary"
-          v-model="newCommentText"
+          v-model="comment.text"
           placeholder="Enter your comment here"
         ></textarea>
+
         <div class="HStack absolute bottom-5 right-5">
-          <input
-            class="secondary-button"
-            type="button"
-            value="Save Comment"
-            @click="submitComment"
-          />
+          <button class="secondary-button" type="button" @click="submitAnnouncement">
+            Comment
+          </button>
         </div>
       </div>
     </form>
+    <CommentList />
   </div>
 </template>
-
 <script setup lang="ts">
 import { ref } from 'vue'
 import CommentService from '@/services/CommentService'
 import { useAuthStore } from '@/stores/auth'
-import type { AdvisorItem, CommentItem } from '@/type'
+import type { AdvisorItem } from '@/type'
+import type { CommentItem } from '@/type'
+import CommentList from './CommentList.vue'
 const authStore = useAuthStore()
-
-const status = ref(false)
-const newCommentText = ref('')
-const submitComment = async () => {
-  const comment: CommentItem = {
+const comment = ref<CommentItem>({
+  id: 0,
+  text: '',
+  sentByAdvisor: false,
+  history: {
     id: 0,
-    text: newCommentText.value,
-    sentByAdvisor: false, // Or true, depending on your requirements
-    history: {
-      id: 0,
-      studentId: 0,
-      advisorId: 0,
-      commentHistory: []
-    }
+    studentId: 0,
+    advisorId: 0,
+    commentHistory: []
   }
+})
 
-  try {
-    const response = await CommentService.saveComment(comment)
-    console.log(response)
-    console.log(comment);
-    
-    status.value = true
-    newCommentText.value = ''
-
-    setTimeout(() => {
-      status.value = false
-    }, 3000) // Change status back to false after 3 seconds
-  } catch (error) {
-    console.error(error)
-  }
+const submitAnnouncement = async () => {
+  CommentService.saveComment(comment.value).then((res) => {
+    console.log(res.data)
+  })
 }
 </script>
-
 <style scoped>
 #commentForm {
   text-decoration: none;
   /* max-width: 500px; */
 }
 .text-primary,
-textarea::placeholder{
+input::placeholder,
+textarea::placeholder {
   color: rgba(255, 255, 255, 1);
 }
 .secondary-button {
