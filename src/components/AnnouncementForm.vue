@@ -26,13 +26,14 @@
         v-model="newAnnouncementText"
         placeholder="Enter your announcement here"
       ></textarea>
+
+      
       <div class="HStack absolute bottom-5 right-5">
-        <input
+        <button
           class="secondary-button"
           type="button"
-          value="Save Announcement"
           @click="submitAnnouncement"
-        />
+        >Announcement</button>
       </div>
     </div>
   </form>

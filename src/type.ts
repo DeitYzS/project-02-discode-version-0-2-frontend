@@ -35,8 +35,8 @@ export interface CommentItem {
 }
 
 export interface HistoryCommentItem {
-    id: number
-    studentId: number
-    advisorId: number
+    id?: number,
+    studentId: number,
+    advisorId: number,
     commentHistory: CommentItem[]
 }

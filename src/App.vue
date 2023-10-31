@@ -9,14 +9,17 @@ const authStore = useAuthStore()
 const router = useRouter()
 const store = useMessageStore()
 const { message } = storeToRefs(store)
-const token = localStorage.getItem('token')
+const token = localStorage.getItem('access_token')
 const student = localStorage.getItem('student')
 const advisor = localStorage.getItem('advisor')
 const isScrolled = ref(false)
 
 if (token && student) {
   authStore.reloadStudent(token, JSON.parse(student))
-} else if (token && advisor) {
+} else {
+  authStore.logout()
+}
+if (token && advisor) {
   authStore.reloadAdvisor(token, JSON.parse(advisor))
 } else {
   authStore.logout()
@@ -60,11 +63,10 @@ function handleScroll() {
               </router-link>
             </div>
             <div v-if="!authStore.isStudent && !authStore.isAdvisor && !authStore.isAdmin">
-              <router-link :to="{ name: 'home-view'}">
+              <router-link :to="{ name: 'home-view' }">
                 <p class="font-semibold text-2xl font-secondary">Ultimate Alein</p>
               </router-link>
             </div>
-
           </div>
 
           <!-- rigth side -->
@@ -109,22 +111,27 @@ function handleScroll() {
                 >
                   <li class="nav-item px-2">
                     <div v-if="authStore.isAdvisor">
-                      <router-link :to="{ name: 'advisor-detail', params: { id: authStore.advisor?.id } }" class="nav-link font-secondary">
+                      <router-link
+                        :to="{ name: 'advisor-detail', params: { id: authStore.advisor?.id } }"
+                        class="nav-link font-secondary"
+                      >
                         <font-awesome-icon icon="user" />
 
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
                       </router-link>
                     </div>
                     <div v-if="authStore.isStudent">
-                      <router-link :to="{ name: 'student-detail', params: { id: authStore.student?.id } }" class="nav-link font-secondary">
+                      <router-link
+                        :to="{ name: 'student-detail', params: { id: authStore.student?.id } }"
+                        class="nav-link font-secondary"
+                      >
                         <font-awesome-icon icon="user" />
 
                         {{ authStore.currentUserNameStudent || authStore.curretUserNameAdvisor }} |
                       </router-link>
                     </div>
                     <div v-if="authStore.isAdmin">
-                       {{ "ADMIN" }}
-
+                      {{ 'ADMIN' }}
                     </div>
                   </li>
 
