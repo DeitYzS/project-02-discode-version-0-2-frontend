@@ -26,7 +26,7 @@ AnnouncementService.getAnnouncementBy()
     router.push({ name: 'network-error' })
   })
 
-function getFileName(url) {
+function getFileName(url : any) {
   var parts = url.split('/')
   var lastPart = parts[parts.length - 1]
   var part2 = decodeURIComponent(lastPart)
