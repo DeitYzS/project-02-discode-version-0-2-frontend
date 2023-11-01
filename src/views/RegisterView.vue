@@ -11,7 +11,7 @@ const authStore = useAuthStore()
 const messageStore = useMessageStore()
 
 const validationSchema = yup.object({
-  studentId:yup.string().required('The student ID is required'),
+  studentId: yup.string().required('The student ID is required'),
   username: yup.string().required('The email is required'),
   password: yup.string().required('The password is required'),
   firstname: yup.string().required('The firstname is required'),
@@ -41,65 +41,73 @@ const { value: studentId } = useField<string>('studentId')
 const onSubmit = handleSubmit(async (values) => {
   console.log(values)
   try {
-    await authStore.registerStudent(values.studentId ,values.email, values.password, values.username, values.firstname, values.lastname)
+    await authStore.registerStudent(
+      values.studentId,
+      values.email,
+      values.password,
+      values.username,
+      values.firstname,
+      values.lastname
+    )
     console.log('Register Success')
-    router.push({ name: 'login'})
+    router.push({ name: 'login' })
   } catch (err) {
     // messageStore.updateMessage('Could not register, maybe the current username was already used')
     // console.log(err)
     // setTimeout(() => {
     //   messageStore.resetMessage()
     // }, 3000)
-    router.push({ name: 'login'})
-
+    router.push({ name: 'login' })
   }
 })
-
 </script>
+
+
 
 <template>
   <main class="container mx-auto px-4">
-    <div class="flex min-h-full flex-1 flex-col justify-items-center px-6 py-12 lg:px-8 window-base">
-    <form action="#" method="POST" @submit.prevent="onSubmit">
-      <div class="my-5">
-        <h5>StudentID</h5>
-        <TextField class="w-94" type="text" v-model="studentId" :error="errors['studentId']"></TextField>
-      </div>
-      <div class="my-5">
-        <h5>Username</h5>
-        <TextField type="text" v-model="username" :error="errors['username']"></TextField>
-      </div>
-      <div class="my-5">
-        <h5>Firstname</h5>
-        <TextField type="text" v-model="firstname" :error="errors['firstname']"></TextField>
-      </div>
-      <div class="my-5">
-        <h5>Lastname</h5>
-        <TextField type="text" v-model="lastname" :error="errors['lastname']"></TextField>
-      </div>
-      <div class="my-5">
-        <h5>Email</h5>
-        <TextField type="text" v-model="email" :error="errors['email']"></TextField>
-      </div>
-      <div class="my-5">
-        <h5>Password</h5>
-        <TextField type="password" v-model="password" :error="errors['password']"></TextField>
-      </div>
-
-      <button
-        type="submit"
-        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    <div class="flex flex-col items-center justify-center gap-4 px-6 py-12 lg:px-8 window-base">
+      <p class="font-medium text-2xl">Registration</p>
+      <p class="text-base max-w-xl text-justify">Welcome, student! We’re thrilled that you’ve chosen to join our Discode system. This platform is designed to enhance your learning experience and foster a vibrant community of learners. To get started, please register your account.</p>
+      <form
+        action="#"
+        method="POST"
+        @submit.prevent="onSubmit"
+        class="w-full max-w-md items-center justify-center VStack items-center"
       >
-        Submit
-      </button>
-    </form>
-  </div>
-  </main>
- 
+        <div class="my-5 VStack w-full flex flex-col items-start">
+          <h5>StudentID</h5>
+          <TextField type="text" v-model="studentId" :error="errors['studentId']"></TextField>
+        </div>
+        <div class="my-5 VStack w-full flex flex-col items-start">
+          <h5>Username</h5>
+          <TextField type="text" v-model="username" :error="errors['username']"></TextField>
+        </div>
+        <div class="my-5 VStack w-full flex flex-col items-start">
+          <h5>Firstname</h5>
+          <TextField type="text" v-model="firstname" :error="errors['firstname']"></TextField>
+        </div>
+        <div class="my-5 VStack w-full flex flex-col items-start">
+          <h5>Lastname</h5>
+          <TextField type="text" v-model="lastname" :error="errors['lastname']"></TextField>
+        </div>
+        <div class="my-5 VStack w-full flex flex-col items-start">
+          <h5>Email</h5>
+          <TextField type="text" v-model="email" :error="errors['email']"></TextField>
+        </div>
+        <div class="my-5 VStack w-full flex flex-col items-start">
+          <h5>Password</h5>
+          <TextField type="password" v-model="password" :error="errors['password']"></TextField>
+        </div>
 
+        <div class="flex justify-center mt-4">
+          <button type="submit" class="secondary-button">Submit</button>
+        </div>
+      </form>
+    </div>
+  </main>
 </template>
 
-<style scoped>
-TextField{
 
-}</style>
+
+<style scoped></style>
